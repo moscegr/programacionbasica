@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subtema 2.2 | Práctica Final Python</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { accent: '#f59e0b', dark: '#1e293b', primary: '#2563eb' }, fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] } } } }
+    </script>
+    <style> 
+        body { background-color: #f8fafc; color: #334155; overflow-x: hidden; } 
+        .neon-glow { box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+    </style>
+</head>
+<body class="font-sans flex flex-col min-h-screen">
+
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-flag-checkered text-2xl text-accent"></i>
+                <span class="font-bold text-lg text-dark">Subtema 2.2 & Práctica Final</span>
+            </div>
+            <div class="space-x-4">
+                <a href="tema2_1.html" class="text-sm text-slate-500 hover:text-accent transition"><i class="fa-solid fa-arrow-left"></i> Atrás</a>
+                <a href="index.html" class="text-sm text-dark font-bold bg-slate-200 hover:bg-slate-300 px-3 py-1 rounded transition">Terminar <i class="fa-solid fa-house"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-5xl mx-auto w-full px-4 py-10">
+        
+        <!-- Header 2.2 -->
+        <header class="mb-10">
+            <div class="inline-block bg-accent text-white text-xs font-bold px-3 py-1 rounded-full mb-3">40 Horas | RA 2.2</div>
+            <h1 class="text-3xl font-extrabold text-dark mb-4">Estructuras de Datos y Arquitectura de Errores</h1>
+            <p class="text-lg text-slate-600">Dejamos los lenguajes estáticos atrás. En C usábamos arreglos estáticos y punteros directos a memoria. Python administra esto con su Recolector de Basura (Garbage Collector). Pasaremos las siguientes semanas manejando tipos de colecciones robustas como <strong>Listas</strong>, <strong>Tuplas</strong> y <strong>Diccionarios</strong>, y modelaremos comportamientos FIFO y LIFO.</p>
+        </header>
+
+        <section class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200 mb-10">
+            <h2 class="text-2xl font-bold mb-6 text-dark border-b-2 border-slate-100 pb-3"><i class="fa-solid fa-boxes-stacked text-accent mr-2"></i>Taxonomía de Colecciones Nativas</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Listas -->
+                <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl hover:shadow-md transition">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-bold text-lg text-dark">1. Listas <code>[ ]</code></h3>
+                        <i class="fa-solid fa-list text-slate-400"></i>
+                    </div>
+                    <p class="text-xs text-slate-600 mb-4 h-12">Secuencias dinámicas y mutables (editables en runtime). Utilizan mucha memoria pero son muy flexibles.</p>
+                    <div class="bg-dark p-3 rounded-lg text-xs font-mono text-slate-300">
+                        <span class="text-blue-300">coords</span> = [10.1, 15.2]<br>
+                        <span class="text-blue-300">coords</span>.append(20.5)<br>
+                        <span class="text-slate-500"># Muta la memoria original</span>
+                    </div>
+                </div>
+
+                <!-- Tuplas -->
+                <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl hover:shadow-md transition">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-bold text-lg text-dark">2. Tuplas <code>( )</code></h3>
+                        <i class="fa-solid fa-lock text-slate-400"></i>
+                    </div>
+                    <p class="text-xs text-slate-600 mb-4 h-12">Secuencias inmutables (solo lectura). Extremadamente rápidas en lectura. Ideales para variables críticas.</p>
+                    <div class="bg-dark p-3 rounded-lg text-xs font-mono text-slate-300">
+                        <span class="text-blue-300">home</span> = (19.43, -99.13)<br>
+                        <span class="text-red-400 font-bold">home</span><span class="text-slate-300">[0] = 20.0 </span><br>
+                        <span class="text-red-500 font-bold"># TypeError! Crash inminente.</span>
+                    </div>
+                </div>
+
+                <!-- Diccionarios -->
+                <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl hover:shadow-md transition">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-bold text-lg text-dark">3. Diccionarios <code>{ }</code></h3>
+                        <i class="fa-solid fa-book-open text-slate-400"></i>
+                    </div>
+                    <p class="text-xs text-slate-600 mb-4 h-12">Pares Clave:Valor. La estructura principal para bases de datos NoSQL y para configurar objetos de software JSON.</p>
+                    <div class="bg-dark p-3 rounded-lg text-xs font-mono text-slate-300">
+                        <span class="text-blue-300">dron</span> = {"bat": 80, "vel": 12}<br>
+                        <span class="text-blue-300">dron</span>["bat"] -= 10<br>
+                        <span class="text-slate-500"># El valor se actualiza directo por hash</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200 hover:shadow-lg transition-shadow">
+                <h2 class="text-xl font-bold mb-4"><i class="fa-solid fa-layer-group text-accent mr-2"></i>Stacks (LIFO) & Queues (FIFO)</h2>
+                <p class="text-sm mb-4 text-slate-600">Modelar abstracciones físicas es parte de la ingeniería de software. <strong>LIFO</strong> (Last In, First Out) simula el historial de navegación (deshacer paso). <strong>FIFO</strong> (First In, First Out) procesa colas de tareas o peticiones de red.</p>
+                <div class="bg-dark p-4 rounded-xl font-mono text-xs text-slate-300 border border-slate-700">
+                    <span class="text-slate-500"># Pila (LIFO) usando una Lista nativa</span><br>
+                    historial = []<br>
+                    historial.append("GPS_Punto_1")<br>
+                    historial.append("GPS_Punto_2")<br>
+                    reversa = historial.<span class="text-blue-400 font-bold">pop()</span> <span class="text-slate-400"># Saca el Punto_2</span>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200 hover:shadow-lg transition-shadow">
+                <h2 class="text-xl font-bold mb-4"><i class="fa-solid fa-shield-halved text-accent mr-2"></i>Arquitectura Try/Except</h2>
+                <p class="text-sm mb-4 text-slate-600">En C, atrapar errores de memoria (SegFaults) requería lógica manual. En Python se encapsula en manejadores de excepciones, salvando al software de un colapso total (crashing) en producción.</p>
+                <div class="bg-dark p-4 rounded-xl font-mono text-xs text-slate-300 border border-slate-700">
+                    <span class="text-purple-400 font-bold">try:</span><br>
+                    &nbsp;&nbsp;velocidad = distancia / tiempo_transcurrido<br>
+                    <span class="text-purple-400 font-bold">except</span> <span class="text-orange-300">ZeroDivisionError</span>:<br>
+                    &nbsp;&nbsp;<span class="text-blue-400">print</span>("Error: División por cero (sensor fallido).")<br>
+                    <span class="text-purple-400 font-bold">finally:</span><br>
+                    &nbsp;&nbsp;<span class="text-blue-400">print</span>("Liberando socket de memoria...") <span class="text-slate-500"># Se ejecuta siempre</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÁCTICA FINAL INTEGRADORA -->
+        <section class="bg-dark p-8 md:p-10 rounded-3xl neon-glow text-white border border-slate-700 shadow-2xl relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSI+PC9yZWN0Pgo8cGF0aCBkPSJNMCAwIEwyMCAwIEwyMCAyMCBMMCAyMCBaIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=')] opacity-20 pointer-events-none"></div>
+            
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-4 mb-6 border-b border-slate-700 pb-5">
+                    <div class="bg-accent/20 p-3 rounded-xl border border-accent/30">
+                        <i class="fa-solid fa-terminal text-4xl text-accent"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Proyecto Integrador Semestral</h2>
+                        <p class="text-sm md:text-base text-slate-400 font-mono mt-1">Integra: Variables + Bucles While/For + def (Funciones) + Colas FIFO + Try/Except.</p>
+                    </div>
+                </div>
+
+                <p class="text-slate-300 mb-6 text-sm md:text-base max-w-3xl leading-relaxed">Analiza el código maestro. Este bloque consolida el trabajo de todo el semestre. Simula la recepción asíncrona de coordenadas de vuelo de un cliente en una <strong>Cola (FIFO)</strong>. El programa las procesa <em>iterativamente</em> llamando a una <strong>función encapsulada</strong>, la cual cuenta con una estricta <strong>validación de errores</strong> para garantizar que el hardware responda adecuadamente.</p>
+                qDisplay.innerHTML = '<span class="text-slate-500 italic">Cola vacía</span>';
+                return;
+            }
+            myQueue.forEach(item => {
+                const el = document.createElement('span');
+                el.className = 'bg-primary/20 text-blue-300 px-2 py-1 rounded border border-primary/30 shrink-0';
+                el.innerText = item;
+                qDisplay.appendChild(el);
+            });
+        }
+
+        function addQueue() {
+            const input = document.getElementById('newDest');
+            const val = input.value.trim();
+            if(val) {
+                myQueue.push(val); // append() in python
+                logDisplay.innerHTML += `<br>> Añadido a la cola: ${val}`;
+                input.value = '';
+                renderQueue();
+                logDisplay.scrollTop = logDisplay.scrollHeight;
+            }
+        }
+
+        function popQueue() {
+            if(myQueue.length > 0) {
+                const procesado = myQueue.shift(); // popleft() in python deque
+                logDisplay.innerHTML += `<br>> <span class="text-accent">procesar_entrega('${procesado}')</span> -> Navegando hacia: ${procesado}`;
+                renderQueue();
+            } else {
+                logDisplay.innerHTML += `<br>> <span class="text-red-400">La cola está vacía. Fin de programa.</span>`;
+            }
+            logDisplay.scrollTop = logDisplay.scrollHeight;
+        }
+    </script>
+</body>
+</html>
