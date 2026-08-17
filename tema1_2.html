@@ -8,9 +8,21 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
     <script>
-        tailwind.config = { theme: { extend: { colors: { primary: '#2563eb', dark: '#1e293b' }, fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] } } } }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] },
+                    colors: { primary: '#2563eb', dark: '#1e293b' }
+                }
+            }
+        }
     </script>
-    <style> body { background-color: #f8fafc; color: #334155; } </style>
+    <style> 
+        body { background-color: #ffffff; color: #334155; } 
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
 </head>
 <body class="font-sans flex flex-col min-h-screen">
 
@@ -27,203 +39,158 @@
         </div>
     </nav>
 
-    <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-10">
+    <main class="flex-grow max-w-5xl mx-auto w-full px-4 py-10">
         <header class="mb-10">
             <div class="inline-block bg-primary text-white text-xs font-bold px-3 py-1 rounded-full mb-3">20 Horas | RA 1.2</div>
-            <h1 class="text-3xl font-extrabold text-dark mb-4">Estructuras de Control en Python</h1>
-            <p class="text-lg text-slate-600">Dotaremos a nuestros programas de toma de decisiones e iteraciones. En Python, la indentación (espacios al inicio de la línea) es OBLIGATORIA para definir bloques de código, a diferencia de las llaves <code>{}</code> de C.</p>
+            <h1 class="text-3xl font-extrabold text-dark mb-4">Estructuras de Control de Flujo</h1>
+            <p class="text-lg text-slate-600">Dotaremos a nuestros programas de "Inteligencia". La capacidad de tomar decisiones basadas en condiciones cambiantes y de repetir acciones en bucle. Es aquí donde la automatización del hardware realmente toma forma.</p>
+            
+            <div class="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-5">
+                <h3 class="font-bold text-blue-900 mb-2"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Regla de Oro: La Indentación (Sangría)</h3>
+                <p class="text-sm text-blue-800">A diferencia de Lenguaje C donde agrupamos el código dentro de llaves <code>{}</code>, en Python los bloques de código pertenecientes a un <code>if</code>, <code>while</code> o <code>for</code> se delimitan <strong>exclusivamente por espacios en blanco al inicio de la línea (generalmente 4 espacios o 1 tabulador)</strong>. Si fallas en este espaciado, el programa crasheará instantáneamente con un <code>IndentationError</code>.</p>
+            </div>
         </header>
 
-        <div class="grid md:grid-cols-2 gap-6 mb-12">
-            <!-- Condicionales -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h2 class="text-xl font-bold mb-4 text-dark"><i class="fa-solid fa-code-branch text-primary mr-2"></i>Condicionales</h2>
-                <p class="text-sm mb-4">Reemplazamos el <code>switch</code> de C usando <code>if</code>, <code>elif</code> y <code>else</code>.</p>
-                <pre class="bg-dark text-slate-300 p-4 rounded-lg font-mono text-sm overflow-x-auto">
-<span class="text-purple-400">if</span> bateria > <span class="text-orange-300">50</span>:
-    <span class="text-blue-400">print</span>(<span class="text-green-400">"Misión normal"</span>)
-<span class="text-purple-400">elif</span> bateria > <span class="text-orange-300">20</span>:
-    <span class="text-blue-400">print</span>(<span class="text-green-400">"Volver a base"</span>)
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-dark flex items-center"><i class="fa-solid fa-code-branch text-primary mr-3"></i>Plan de Clases y Prácticas Reales</h2>
+            <p class="text-sm text-slate-500 mb-6">Selecciona la semana para acceder a los bloques teóricos de control de flujo, análisis de lógica y misiones de codificación.</p>
+
+            <!-- Tab Buttons -->
+            <div class="flex overflow-x-auto border-b border-slate-200 hide-scrollbar mb-6" role="tablist">
+                <button id="btn-sem7" class="px-6 py-3 font-bold text-sm text-primary border-b-2 border-primary focus:outline-none whitespace-nowrap" onclick="openTab('sem7', this)">Semana 7</button>
+                <button id="btn-sem8" class="px-6 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-primary focus:outline-none whitespace-nowrap transition" onclick="openTab('sem8', this)">Semana 8</button>
+                <button id="btn-sem9" class="px-6 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-primary focus:outline-none whitespace-nowrap transition" onclick="openTab('sem9', this)">Semana 9</button>
+            </div>
+
+            <div id="sem7" class="tab-content active bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Condicionales (if, elif, else)</h3>
+                    <h4 class="font-bold text-primary mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>Bifurcación:</strong> Momento exacto en el que el flujo lineal del software se divide en diferentes "caminos" según la evaluación (True/False) de una variable.</li>
+                        <li><strong>Bloque de código (Suite):</strong> Líneas de código agrupadas por el mismo nivel de indentación que se ejecutan juntas si el condicional asociado es verdadero.</li>
+                        <li><strong>Switch/Case:</strong> Estructura clásica en C. En Python, históricamente se reemplaza anidando múltiples <code>elif</code> (Else-If) secuencialmente para evaluar múltiples posibilidades.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-primary mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Asistente de Altitud de Vuelo Legal:</strong> La normativa prohíbe volar drones a más de 120 metros de altitud.</p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-blue-300">altitud_actual</span> = <span class="text-orange-300">145.0</span>
+
+<span class="text-purple-400">if</span> <span class="text-blue-300">altitud_actual</span> > <span class="text-orange-300">120.0</span>:
+    <span class="text-slate-500"># Este bloque tiene 4 espacios de indentación</span>
+    <span class="text-blue-400">print</span>(<span class="text-green-300">"ALERTA: Violación de espacio aéreo. Descendiendo."</span>)
+<span class="text-purple-400">elif</span> <span class="text-blue-300">altitud_actual</span> == <span class="text-orange-300">120.0</span>:
+    <span class="text-blue-400">print</span>(<span class="text-green-300">"ADVERTENCIA: Límite legal alcanzado."</span>)
 <span class="text-purple-400">else</span>:
-    <span class="text-blue-400">print</span>(<span class="text-green-400">"Aterrizaje emergencia"</span>)</pre>
-            </div>
-
-            <!-- Ciclos -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h2 class="text-xl font-bold mb-4 text-dark"><i class="fa-solid fa-rotate text-primary mr-2"></i>Ciclos (Loops)</h2>
-                <p class="text-sm mb-4">En Python usamos <code>while</code> y un ciclo <code>for</code> que es mucho más poderoso para recorrer elementos.</p>
-                <pre class="bg-dark text-slate-300 p-4 rounded-lg font-mono text-sm overflow-x-auto">
-<span class="text-slate-500"># Bucle While</span>
-<span class="text-purple-400">while</span> volando:
-    <span class="text-blue-400">leer_sensores</span>()
-
-<span class="text-slate-500"># Bucle For (Rango de 1 a 5)</span>
-<span class="text-purple-400">for</span> i <span class="text-purple-400">in</span> <span class="text-blue-400">range</span>(<span class="text-orange-300">1</span>, <span class="text-orange-300">6</span>):
-    <span class="text-blue-400">print</span>(<span class="text-green-400">f"Punto {i} alcanzado"</span>)</pre>
-            </div>
-        </div>
-
-        <section class="mb-12 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-            <h2 class="text-xl font-bold mb-4 text-dark border-b pb-2"><i class="fa-solid fa-traffic-light text-primary mr-2"></i>Control de Ciclos Avanzado (Break y Continue)</h2>
-            <p class="text-slate-600 mb-4 text-sm md:text-base">En un flujo de software robótico real (como el de un dron), el terreno y los sensores dictan cambios abruptos. A veces necesitamos alterar el flujo de un bucle desde su interior. Para esto usamos las sentencias reservadas <code>break</code> (rompe y finaliza el ciclo por completo, ideal para salidas de emergencia) y <code>continue</code> (ignora la iteración actual y pasa a la siguiente lectura iterativa).</p>
-            
-            <div class="flex flex-col lg:flex-row gap-6 mb-6">
-                <div class="flex-1 bg-slate-50 p-5 rounded-xl border border-slate-200 hover:border-red-300 transition">
-                    <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-2">
-                        <p class="font-bold text-sm text-dark"><i class="fa-solid fa-stop text-red-500 mr-2"></i>Sentencia Break:</p>
-                        <span class="bg-slate-200 text-xs text-slate-600 px-2 py-1 rounded">Abortar misión</span>
+    <span class="text-blue-400">print</span>(<span class="text-green-300">"Altitud dentro de parámetros normales."</span>)</pre>
                     </div>
-                    <pre class="text-sm font-mono text-slate-700 overflow-x-auto">
-<span class="text-purple-600">for</span> altitud <span class="text-purple-600">in</span> <span class="text-blue-600">range</span>(0, 1000, 10):
-    <span class="text-slate-500"># Monitoreo en tiempo real</span>
-    <span class="text-purple-600">if</span> sensor_viento_fuerte == <span class="text-orange-600">True</span>:
-        <span class="text-blue-600">print</span>("Alerta crítica.")
-        <span class="text-red-500 font-bold">break</span> <span class="text-slate-500"># Destruye el bucle FOR</span>
-    <span class="text-blue-600">print</span>(f"Avanzando: {altitud}m")</pre>
-                </div>
-                <div class="flex-1 bg-slate-50 p-5 rounded-xl border border-slate-200 hover:border-yellow-300 transition">
-                    <div class="flex justify-between items-center mb-3 border-b border-slate-200 pb-2">
-                        <p class="font-bold text-sm text-dark"><i class="fa-solid fa-forward-step text-yellow-500 mr-2"></i>Sentencia Continue:</p>
-                        <span class="bg-slate-200 text-xs text-slate-600 px-2 py-1 rounded">Omitir iteración</span>
-                    </div>
-                    <pre class="text-sm font-mono text-slate-700 overflow-x-auto">
-<span class="text-purple-600">for</span> sector <span class="text-purple-600">in</span> sectores_mapeo:
-    <span class="text-slate-500"># Evaluación de permisos</span>
-    <span class="text-purple-600">if</span> sector == "Zona Militar":
-        <span class="text-blue-600">print</span>("Evadiendo sector...")
-        <span class="text-yellow-600 font-bold">continue</span> <span class="text-slate-500"># Salta al sig. sector</span>
-    <span class="text-blue-600">print</span>("Fotografiando terreno")</pre>
+
+                    <h4 class="font-bold text-primary mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Seguro de Despegue (IF simple):</strong> Un dron de carreras no debe arrancar si la batería de las gafas FPV es baja. Escribe un script que evalúe <code>gafas_bat < 15</code>. Si es cierto, imprime "Abortar carrera. Batería de video crítica". Si es falso, el código simplemente debe terminar sin imprimir nada (no pongas <code>else</code>).</li>
+                        <li><strong>Geofencing Básico (IF/ELSE):</strong> Pide la latitud actual por consola. Si la latitud es exactamente igual a la de un aeropuerto cercano (ej. 19.43), imprime "Bloqueo de motores activado (Geofencing)". Si es cualquier otra (ELSE), imprime "Motores armados".</li>
+                        <li><strong>Categorización de Viento (ELIF):</strong> Escribe un script que reciba la velocidad del viento (m/s). Si es mayor a 15: "Imposible volar, huracán". Elif mayor a 8: "Vuelo con precaución, usar modo Sport". Else: "Viento en calma, óptimo para fotos".</li>
+                        <li><strong>Chequeo Secuencial Anidado:</strong> Crea un bloque de seguridad anidado. Primer IF: verifica si hay conexión GPS. Solo si es True, entra a un segundo IF interno que verifique si hay más de 8 satélites conectados. Si ambos se cumplen, imprime "Misión autónoma lista". Si falla el primero, imprime "Volando en modo manual (ATTI)".</li>
+                        <li><strong>El Operador Ternario (Pythonico):</strong> El operador ternario permite hacer un if/else en una sola línea elegante. Escribe: <code>estado = "En Peligro" if voltaje_celda < 3.2 else "Celda Sana"</code>. Imprime el estado. Esto es útil para limpiar código redundante.</li>
+                    </ol>
                 </div>
             </div>
 
-            <div class="bg-dark p-6 md:p-8 rounded-xl border border-slate-700 shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fa-solid fa-code text-6xl text-white"></i></div>
-                <h3 class="text-white text-lg font-bold mb-2 relative z-10"><i class="fa-solid fa-plane-up text-accent mr-2"></i>Simulador Práctico: Toma de Decisiones en Tiempo Real</h3>
-                <p class="text-slate-400 text-sm mb-6 relative z-10 max-w-2xl">Programa el hardware del dron. Hemos detectado una parvada de aves en el <strong class="text-white">Sector 3</strong>. Escribe un bloque condicional <code>if</code> dentro del bucle <code>for</code> que procesa los sectores para evitar el área de riesgo.</p>
-                
-                <div class="bg-slate-900 border border-slate-600 p-4 rounded-lg mb-6 shadow-inner relative z-10">
-                    <div class="flex flex-col md:flex-row gap-3 items-center">
-                        <span class="text-purple-400 font-mono text-sm w-full md:w-auto">if sector_actual == <span class="text-orange-400">3</span>:</span>
-                        <div class="flex w-full md:w-auto gap-2">
-                            <select id="loopAction" class="flex-grow bg-black text-white border border-slate-500 rounded p-2 text-sm font-mono focus:border-accent outline-none hover:border-slate-400 transition cursor-pointer">
-                                <option value="none">-- Programar Acción Lógica --</option>
-                                <option value="break">break # Cancelar misión</option>
-                                <option value="continue">continue # Esquivar y seguir</option>
-                                <option value="print">print("Ignorar alerta")</option>
-                            </select>
-                            <button onclick="runLoopSim()" class="bg-accent hover:bg-yellow-500 text-dark font-extrabold py-2 px-6 rounded transition shadow-[0_0_10px_rgba(245,158,11,0.3)] hover:shadow-[0_0_15px_rgba(245,158,11,0.6)] flex items-center gap-2"><i class="fa-solid fa-bolt"></i> Compilar</button>
-                        </div>
+            <div id="sem8" class="tab-content bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Ciclos While y Evaluación Continua</h3>
+                    <h4 class="font-bold text-primary mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>Bucle (Loop) While:</strong> Estructura que repite un bloque de código <em>mientras</em> una condición relacional siga siendo <code>True</code>. Al momento en que la condición se vuelve <code>False</code>, el bucle se destruye y el programa continúa.</li>
+                        <li><strong>Iteración:</strong> Cada vuelta o repetición individual que ejecuta el bucle de inicio a fin.</li>
+                        <li><strong>Bucle Infinito:</strong> Falla lógica donde la variable que se evalúa en el <code>while</code> jamás cambia su estado a falso. El CPU se queda atrapado procesando la misma instrucción eternamente, colapsando el software.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-primary mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Drenaje de Batería Simulado:</strong> Un script que monitorea la caída de energía vuelta por vuelta.</p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-blue-300">bateria</span> = <span class="text-orange-300">100</span>
+
+<span class="text-slate-500"># Se repetirá eternamente MIENTRAS bateria sea mayor a 0</span>
+<span class="text-purple-400">while</span> <span class="text-blue-300">bateria</span> > <span class="text-orange-300">0</span>:
+    <span class="text-blue-400">print</span>(<span class="text-green-300">f"Nivel de energía: {bateria}%"</span>)
+    <span class="text-slate-500"># CRÍTICO: Modificar la variable de control o será infinito</span>
+    <span class="text-blue-300">bateria</span> = <span class="text-blue-300">bateria</span> - <span class="text-orange-300">20</span>  <span class="text-slate-500"># Resta 20 en cada iteración</span>
+
+<span class="text-blue-400">print</span>(<span class="text-green-300">"El dron se ha apagado."</span>)</pre>
                     </div>
-                </div>
-                
-                <div class="flex gap-2 mb-4 relative z-10" id="drone-path">
-                    <!-- Path rendering visual -->
-                    <div class="flex-1 max-w-[60px] h-12 border-2 border-slate-600 flex items-center justify-center font-bold text-slate-500 rounded-lg bg-slate-800 transition-colors duration-300">S-1</div>
-                    <div class="flex-1 max-w-[60px] h-12 border-2 border-slate-600 flex items-center justify-center font-bold text-slate-500 rounded-lg bg-slate-800 transition-colors duration-300">S-2</div>
-                    <div class="flex-1 max-w-[60px] h-12 border-2 border-red-500/50 bg-red-900/30 flex items-center justify-center font-bold text-red-400 rounded-lg transition-colors duration-300" title="Aves Detectadas"><i class="fa-solid fa-dove"></i> 3</div>
-                    <div class="flex-1 max-w-[60px] h-12 border-2 border-slate-600 flex items-center justify-center font-bold text-slate-500 rounded-lg bg-slate-800 transition-colors duration-300">S-4</div>
-                    <div class="flex-1 max-w-[60px] h-12 border-2 border-slate-600 flex items-center justify-center font-bold text-slate-500 rounded-lg bg-slate-800 transition-colors duration-300">S-5</div>
-                </div>
-                <div id="loop-log" class="font-mono text-xs text-green-400 h-32 bg-black border border-slate-700 p-3 rounded-lg overflow-y-auto shadow-inner relative z-10">
-                    <span class="text-slate-500">> Esperando instrucciones de control de flujo...</span>
+
+                    <h4 class="font-bold text-primary mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Cuenta Regresiva de Despegue:</strong> Inicia una variable `contador` en 5. Crea un bucle <code>while</code> que imprima el número, espere (puedes investigar cómo importar `time.sleep(1)` en Python para pausar un segundo), le reste 1 al contador y repita hasta llegar a cero. Al salir del bucle, imprime "¡MOTORES A MÁXIMA POTENCIA!".</li>
+                        <li><strong>Autenticación de Terminal GCS:</strong> Crea una consola de Ground Control Station (GCS). Pide una contraseña con <code>input()</code>. Usa un <code>while password != "drone123":</code> para atrapar al usuario en un bucle pidiendo la contraseña una y otra vez hasta que ingrese la correcta.</li>
+                        <li><strong>Altímetro de Ascenso:</strong> Un dron empieza en altitud 0. Debe subir hasta los 50 metros. Usa un bucle que sume 5 metros por vuelta y haga un print que diga "Ascendiendo... Altitud actual: X metros". Detén el bucle cuando llegue a 50.</li>
+                        <li><strong>Menú de Comandos Infinito:</strong> Declara un bucle infinito a propósito (<code>while True:</code>). Adentro, muestra un menú con opciones (1. Cámara, 2. Aterrizar, 3. Apagar sistema). Usa inputs e IFs. Si elige 3, usa la instrucción especial <code>break</code> para romper el bucle infinito manualmente desde adentro y apagar el sistema.</li>
+                        <li><strong>Falla de Sensores (Crash Simulado):</strong> En IDLE, escribe un bucle <code>while</code> que sume una variable e imprima un texto, pero olvida a propósito cambiar la condición de salida. Ejecútalo. Observa cómo la consola se descontrola. Aprende a frenar un bucle desbocado presionando la interrupción de hardware por teclado (generalmente <code>Ctrl + C</code>).</li>
+                    </ol>
                 </div>
             </div>
+
+            <div id="sem9" class="tab-content bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Ciclo For y Control de Interrupciones Avanzado</h3>
+                    <h4 class="font-bold text-primary mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>Bucle For (Foreach iterativo):</strong> En Python, el bucle For es infinitamente más poderoso que en C. No se usa para contar números rígidamente, sino para "recorrer" o visitar uno a uno los elementos de una colección de datos (como letras en un texto, o coordenadas en un rango).</li>
+                        <li><strong>Sentencia <code>break</code>:</strong> Una salida de emergencia. Si se activa dentro de un bucle (ya sea for o while), destruye inmediatamente el ciclo, sin importar cuántas iteraciones faltaban.</li>
+                        <li><strong>Sentencia <code>continue</code>:</strong> Una herramienta de evasión. Cancela <em>solamente la iteración actual</em>, saltándose el código que le sigue abajo, y brinca directamente a evaluar el siguiente elemento del bucle.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-primary mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Recorriendo Zonas de Rastreo (Waypoints) con `continue`:</strong> El dron debe escanear sectores, pero debe saltarse las Zonas Militares sin romper toda la misión.</p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-slate-500"># Usaremos una lista simple para recorrer</span>
+<span class="text-blue-300">sectores</span> = [<span class="text-green-300">"Bosque"</span>, <span class="text-green-300">"Zona Militar"</span>, <span class="text-green-300">"Río"</span>, <span class="text-green-300">"Montaña"</span>]
+
+<span class="text-purple-400">for</span> sector <span class="text-purple-400">in</span> <span class="text-blue-300">sectores</span>:
+    <span class="text-purple-400">if</span> sector == <span class="text-green-300">"Zona Militar"</span>:
+        <span class="text-blue-400">print</span>(<span class="text-green-300">"Sector restringido detectado. Evadiendo..."</span>)
+        <span class="text-yellow-400 font-bold">continue</span>  <span class="text-slate-500"># Brinca el análisis y pasa directo a 'Río'</span>
+    
+    <span class="text-blue-400">print</span>(<span class="text-green-300">f"Encendiendo cámara espectral y escaneando: {sector}"</span>)</pre>
+                    </div>
+
+                    <h4 class="font-bold text-primary mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Análisis de Cadena de Datos (Telemetry Parse):</strong> Tienes un string que llegó de la antena: <code>datos = "G-G-G-E-G"</code> (donde G es Good, E es Error). Usa un bucle <code>for letra in datos:</code> para imprimir letra por letra en la pantalla, simulando el decodificador leyendo un paquete de bits.</li>
+                        <li><strong>Generador de Rango Fijo <code>range()</code>:</strong> Un dron fotogramétrico debe tomar exactamente 100 fotografías programadas. Crea un bucle usando la función <code>for foto in range(1, 101):</code> y haz que el script imprima "Capturando foto número: X". </li>
+                        <li><strong>Mapeo con Saltos (Step Range):</strong> Usando la misma función range, programa el dron para que avance sobre un eje en saltos de 5 metros. El bucle debe ir de 0 a 50. La instrucción es <code>range(0, 51, 5)</code>. Imprime cada posición.</li>
+                        <li><strong>Impacto Inminente (Uso Crítico de Break):</strong> Simula el avance del dron con un bucle for del 1 al 1000 metros. Adentro, pon un <code>if</code> simulando un sensor frontal: si la distancia llega a los 350 metros, activa un <code>break</code> e imprime "Obstáculo inminente detectado a 350m. Freno de emergencia. Abortando ruta preprogramada". Comprueba que el contador nunca llegó al 1000.</li>
+                        <li><strong>Sumatoria de Carga (Algoritmo Clásico):</strong> Este es un examen real de lógica. Tienes una variable <code>peso_total = 0</code> afuera de tu bucle. Tienes un bucle que simula procesar 5 paquetes que cargará el dron. Dentro del bucle, pídele al usuario el peso de cada paquete con un input. Súmalo a <code>peso_total</code> en cada iteración. Al finalizar el bucle, imprime el peso combinado para validar si el dron puede volar.</li>
+                    </ol>
+                </div>
+            </div>
+
         </section>
 
-        <section class="bg-slate-800 p-6 rounded-2xl shadow-lg border border-slate-700 text-white">
-            <h3 class="text-lg font-bold mb-2"><i class="fa-solid fa-bug text-accent mr-2"></i>Evaluación 1.2.1: Análisis de Código</h3>
-            <p class="text-sm text-slate-300 mb-4">Observa el siguiente ciclo <code>while</code>. ¿Cuántas veces imprimirá "Girando motor"?</p>
-            
-            <pre class="bg-slate-900 p-4 rounded text-sm font-mono mb-4 text-slate-300 border border-slate-600">
-contador = <span class="text-orange-300">0</span>
-<span class="text-purple-400">while</span> contador < <span class="text-orange-300">3</span>:
-    <span class="text-blue-400">print</span>(<span class="text-green-400">"Girando motor"</span>)
-    contador += <span class="text-orange-300">1</span></pre>
-
-            <div class="flex gap-2">
-                <button onclick="res(2)" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded transition">2 veces</button>
-                <button onclick="res(3)" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded transition">3 veces</button>
-                <button onclick="res(4)" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded transition">Infinito</button>
-            </div>
-            
-            <!-- Toast local -->
-            <div id="msg" class="mt-4 p-3 rounded hidden font-semibold text-sm"></div>
-        </section>
     </main>
 
+    <footer class="bg-slate-100 text-slate-500 py-6 text-center text-sm border-t border-slate-200 mt-auto">
+        <p>CONALEP - Docente de Programación e IA | Ciclo Escolar Actual</p>
+    </footer>
+
     <script>
-        function res(val) {
-            const msg = document.getElementById('msg');
-            msg.classList.remove('hidden', 'bg-red-500/20', 'text-red-400', 'bg-green-500/20', 'text-green-400');
-            if(val === 3) {
-                msg.classList.add('bg-green-500/20', 'text-green-400');
-                msg.innerHTML = '<i class="fa-solid fa-check"></i> ¡Exacto! Se ejecuta cuando contador es 0, 1 y 2. Al ser 3, la condición (3 < 3) es falsa y el ciclo termina.';
-            } else {
-                msg.classList.add('bg-red-500/20', 'text-red-400');
-                msg.innerHTML = '<i class="fa-solid fa-xmark"></i> Incorrecto. Analiza los valores: 0 (sí), 1 (sí), 2 (sí). 3 < 3 es Falso.';
-            }
-        }
-
-        async function runLoopSim() {
-            const action = document.getElementById('loopAction').value;
-            const log = document.getElementById('loop-log');
-            const pathBoxes = document.getElementById('drone-path').children;
+        function openTab(tabId, btnElement) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn, [id^="btn-sem"]').forEach(btn => {
+                btn.classList.remove('text-primary', 'border-primary');
+                btn.classList.add('text-slate-500', 'border-transparent');
+            });
             
-            // Reiniciar consola gráfica
-            log.innerHTML = '';
-            for(let box of pathBoxes) {
-                box.classList.remove('bg-primary', 'text-white', 'border-blue-400', 'opacity-25', 'bg-red-600');
-                if(box.innerText.includes('3')) {
-                    box.classList.add('bg-red-900/30');
-                } else {
-                    box.classList.add('bg-slate-800');
-                }
-            }
-
-            if(action === 'none') {
-                log.innerHTML = '<span class="text-red-400 font-bold">IndentationError:</span> expected an indented block after \'if\' statement on line 1';
-                return;
-            }
-
-            log.innerHTML = '<span class="text-slate-400">> Compilando estructura de control... Ejecutando iteraciones:</span>\n\n';
-            
-            for(let i = 1; i <= 5; i++) {
-                let box = pathBoxes[i-1];
-                // Estado "Activo/Evaluando"
-                box.classList.replace('bg-slate-800', 'bg-primary');
-                box.classList.add('border-blue-400', 'text-white');
-                
-                // Efecto de pausa para visualizar iteración
-                await new Promise(r => setTimeout(r, 700)); 
-
-                if(i === 3) {
-                    if(action === 'break') {
-                        log.innerHTML += `<span class="text-red-400 font-bold">[EVAL]</span> if sector_actual == 3: True\n`;
-                        log.innerHTML += `<span class="text-red-400 font-bold">> Ejecutando BREAK.</span> Bucle FOR destruido. Protocolo de retorno a casa iniciado.\n\n`;
-                        box.classList.replace('bg-red-900/30', 'bg-red-600');
-                        break;
-                    } else if (action === 'continue') {
-                        log.innerHTML += `<span class="text-yellow-400 font-bold">[EVAL]</span> if sector_actual == 3: True\n`;
-                        log.innerHTML += `<span class="text-yellow-400 font-bold">> Ejecutando CONTINUE.</span> Ignorando bloque restante. Evaluando siguiente elemento...\n\n`;
-                        box.classList.remove('bg-primary', 'border-blue-400', 'text-white');
-                        box.classList.add('opacity-25'); // Efecto visual de salto
-                        continue;
-                    } else {
-                        log.innerHTML += `<span class="text-red-500 font-bold">[EVAL]</span> if sector_actual == 3: True -> Imprimiendo mensaje y continuando bloque liso...\n`;
-                        log.innerHTML += `<span class="bg-red-500 text-white p-1 rounded font-bold">¡CRÍTICO!</span> Impacto detectado en Sector 3. El dron no evadió la zona. Falla del software.\n\n`;
-                        box.classList.replace('bg-red-900/30', 'bg-red-600');
-                        break; // Sale forzoso por "choque" simulado
-                    }
-                }
-                
-                log.innerHTML += `<span class="text-slate-400">[Bucle for i=${i}]</span> Sector ${i} procesado correctamente. Coordenadas guardadas.\n`;
-                // Termina iteración exitosa
-                box.classList.replace('bg-primary', 'bg-green-600');
-                box.classList.replace('border-blue-400', 'border-green-400');
-            }
-            log.innerHTML += '\n<span class="text-blue-300 font-bold">> Main thread ha finalizado su ejecución de bloque for.</span>';
-            // Scrollear consola al final
-            log.scrollTop = log.scrollHeight;
+            document.getElementById(tabId).classList.add('active');
+            btnElement.classList.remove('text-slate-500', 'border-transparent');
+            btnElement.classList.add('text-primary', 'border-primary');
         }
     </script>
 </body>
