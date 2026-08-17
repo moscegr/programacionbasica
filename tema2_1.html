@@ -8,9 +8,21 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
     <script>
-        tailwind.config = { theme: { extend: { colors: { secondary: '#16a34a', dark: '#1e293b' }, fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] } } } }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] },
+                    colors: { secondary: '#16a34a', dark: '#1e293b' }
+                }
+            }
+        }
     </script>
-    <style> body { background-color: #f8fafc; color: #334155; } </style>
+    <style> 
+        body { background-color: #ffffff; color: #334155; } 
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
 </head>
 <body class="font-sans flex flex-col min-h-screen">
 
@@ -27,66 +39,200 @@
         </div>
     </nav>
 
-    <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-10">
+    <main class="flex-grow max-w-5xl mx-auto w-full px-4 py-10">
         <header class="mb-10">
             <div class="inline-block bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full mb-3">26 Horas | RA 2.1</div>
-            <h1 class="text-3xl font-extrabold text-dark mb-4">Modularidad y Funciones</h1>
-            <p class="text-lg text-slate-600">Un buen programador no repite código. Aprenderemos a encapsular la lógica en bloques reutilizables llamados <strong>Funciones</strong> usando la palabra clave reservada <code>def</code>.</p>
+            <h1 class="text-3xl font-extrabold text-dark mb-4">Modularidad y Funciones Encapsuladas</h1>
+            <p class="text-lg text-slate-600">Un buen ingeniero de software no repite código. Si vas a encender los motores del dron 50 veces en un mismo script, no escribes 50 veces las instrucciones para darles energía. Encapsulas esa lógica en un bloque reutilizable llamado <strong>Función</strong> usando la palabra clave <code>def</code>.</p>
+            
+            <div class="mt-6 bg-green-50 border border-green-200 rounded-xl p-5">
+                <h3 class="font-bold text-green-900 mb-2"><i class="fa-solid fa-box-open mr-2"></i>El Principio de "Caja Negra"</h3>
+                <p class="text-sm text-green-800">Crear una función es como fabricar un microchip personalizado. No importa cómo está soldado por dentro, lo importante es que al "llamarlo" e introducirle un dato (Argumento), el chip lo procese y expulse un resultado perfecto. Las funciones limpian el archivo principal y hacen que la arquitectura del sistema sea profesional.</p>
+            </div>
         </header>
 
-        <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-10">
-            <h2 class="text-xl font-bold mb-4 text-dark border-b pb-2"><i class="fa-solid fa-box-open text-secondary mr-2"></i>Estructura de `def`</h2>
-            <p class="mb-4">A diferencia de C, no tenemos que indicar el tipo de dato que retorna la función. Python lo maneja dinámicamente.</p>
-            
-            <div class="bg-dark p-5 rounded-lg text-sm text-slate-300 font-mono mb-4 overflow-x-auto">
-<pre><span class="text-purple-400">def</span> <span class="text-blue-400">calcular_distancia</span>(vel, tiempo):
-    <span class="text-slate-500">"""Calcula la distancia recorrida en línea recta."""</span>
-    distancia = vel * tiempo
-    <span class="text-purple-400">return</span> distancia
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-dark flex items-center"><i class="fa-solid fa-layer-group text-secondary mr-3"></i>Plan de Clases y Prácticas Reales</h2>
+            <p class="text-sm text-slate-500 mb-6">Selecciona la semana para desplegar la sintaxis de construcción de funciones, inyección de variables locales y los 5 retos de código en Python.</p>
 
-<span class="text-slate-500"># Llamando a la función (Paso de parámetros)</span>
-resultado = <span class="text-blue-400">calcular_distancia</span>(<span class="text-orange-300">15</span>, <span class="text-orange-300">3</span>)
-<span class="text-blue-400">print</span>(<span class="text-green-400">f"El dron recorrió {resultado} metros."</span>)</pre>
+            <!-- Tab Buttons -->
+            <div class="flex overflow-x-auto border-b border-slate-200 hide-scrollbar mb-6" role="tablist">
+                <button id="btn-sem10" class="px-6 py-3 font-bold text-sm text-secondary border-b-2 border-secondary focus:outline-none whitespace-nowrap" onclick="openTab('sem10', this)">Semana 10</button>
+                <button id="btn-sem11" class="px-6 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-secondary focus:outline-none whitespace-nowrap transition" onclick="openTab('sem11', this)">Semana 11</button>
+                <button id="btn-sem12" class="px-6 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-secondary focus:outline-none whitespace-nowrap transition" onclick="openTab('sem12', this)">Semana 12</button>
+                <button id="btn-sem13" class="px-6 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-secondary focus:outline-none whitespace-nowrap transition" onclick="openTab('sem13', this)">Semana 13</button>
             </div>
-            
-            <h2 class="text-xl font-bold mb-4 mt-8 text-dark border-b pb-2"><i class="fa-solid fa-crosshairs text-secondary mr-2"></i>Arquitectura Interna: Scope y Retornos de Tupla</h2>
-            <p class="mb-4 text-slate-600">Como ingenieros, debemos gestionar la memoria RAM de manera estricta. Las variables creadas <em>dentro</em> de un <code>def</code> son <strong>Variables Locales</strong>: existen solo mientras la función trabaja, luego son destruidas. Además, Python permite a las funciones romper las reglas de C, devolviendo múltiples variables agrupadas automáticamente en una <strong class="text-secondary">Tupla</strong>.</p>
-            
-            <div class="grid md:grid-cols-2 gap-6 mb-8">
-                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm hover:-translate-y-1 transition duration-300">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">Retorno Múltiple</span>
+
+            <div id="sem10" class="tab-content active bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Definición y Llamadas a Funciones (Declaración `def`)</h3>
+                    <h4 class="font-bold text-secondary mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>Definición vs. Invocación:</strong> Crear una función con <code>def mi_funcion():</code> simplemente le enseña al intérprete de Python cómo funciona el bloque. No ejecuta nada. Para que corra el código, debes invocarla/llamarla escribiendo su nombre seguido de paréntesis: <code>mi_funcion()</code> en tu script principal.</li>
+                        <li><strong>DRY (Don't Repeat Yourself):</strong> Filosofía crítica en programación. No te repitas. Si copias y pegas el mismo código más de dos veces en un archivo, deberías haber hecho una función.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-secondary mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Rutina Pre-Vuelo Embebida:</strong> Agrupamos la carga de sensores en un bloque definido para limpiar el archivo maestro.</p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-slate-500"># Aquí definimos (fabricamos) la función</span>
+<span class="text-purple-400 font-bold">def</span> <span class="text-blue-400">arranque_motores</span>():
+    <span class="text-blue-400">print</span>(<span class="text-green-300">"Escaneando hardware..."</span>)
+    <span class="text-blue-400">print</span>(<span class="text-green-300">"Voltaje OK. ESC calibrados."</span>)
+    <span class="text-blue-400">print</span>(<span class="text-green-300">"Hélices girando."</span>)
+
+<span class="text-slate-500"># El script real empieza aquí. Invocamos la función 2 veces.</span>
+<span class="text-blue-400">arranque_motores</span>()
+<span class="text-slate-500"># ... el dron hace otra cosa, se apaga ... y la reutilizamos sin volver a escribir el código</span>
+<span class="text-blue-400">arranque_motores</span>()</pre>
                     </div>
-                    <pre class="text-xs font-mono text-slate-700 overflow-x-auto">
-<span class="text-purple-600 font-bold">def</span> <span class="text-blue-600">obtener_coordenadas</span>():
-    latitud = 19.4326
-    longitud = -99.1332
-    <span class="text-purple-600 font-bold">return</span> latitud, longitud
 
-<span class="text-slate-500"># 'Unpacking' (Desempaquetado mágico)</span>
-y, x = <span class="text-blue-600">obtener_coordenadas</span>()
-<span class="text-blue-600">print</span>(f"Lat: {y}, Lng: {x}")</pre>
-                </div>
-
-                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm hover:-translate-y-1 transition duration-300">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded">Contexto (Scope Local vs Global)</span>
-                    </div>
-                    <pre class="text-xs font-mono text-slate-700 overflow-x-auto">
-bat_global = 100 <span class="text-slate-500"># Nivel Global</span>
-
-<span class="text-purple-600 font-bold">def</span> <span class="text-blue-600">rutina_vuelo</span>():
-    consumo = 15 <span class="text-slate-500"># Nivel Local</span>
-    <span class="text-blue-600">print</span>(bat_global - consumo)
-
-<span class="text-blue-600">rutina_vuelo</span>()
-<span class="text-blue-600">print</span>(consumo) <span class="text-red-500 font-bold"># NameError! </span>
-<span class="text-slate-500"># 'consumo' ya fue purgado de la RAM.</span></pre>
+                    <h4 class="font-bold text-secondary mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>El Primer Módulo:</strong> Crea una función llamada <code>def mostrar_telemetria():</code>. Adentro, pon tres prints inventados (ej. Altitud: 50m, GPS: Lock, Batería: 80%). Al final de tu script (completamente fuera de la indentación de la función), llámala escribiendo <code>mostrar_telemetria()</code>.</li>
+                        <li><strong>Multi-Llamadas (Automatización):</strong> Basado en la función anterior, crea un bucle <code>for i in range(5):</code> y dentro de ese bucle llama a tu función. Observa cómo 3 líneas de código dentro de la función se convierten en 15 salidas impresas sin esfuerzo. Eso es poder modular.</li>
+                        <li><strong>El Error de Compilación Lógico (Top-Down):</strong> Abre un cuaderno nuevo en Colab. En la primera línea llama a <code>calibrar_brujula()</code>. En la línea 5, declara la función <code>def calibrar_brujula():</code>. Ejecuta la celda. Analiza el <code>NameError</code>. La regla en Python es: El CPU lee de arriba hacia abajo. No puedes usar algo que aún no ha sido fabricado en la memoria.</li>
+                        <li><strong>La Función Vacía (Stub) y palabra clave `pass`:</strong> Cuando estás diseñando la arquitectura de un software masivo, creas contenedores vacíos para programarlos luego. Escribe <code>def algoritmo_ia_colisiones():</code>. Si la dejas vacía, Python crashea por error de indentación. Soluciónalo escribiendo la palabra reservada <code>pass</code> dentro. Esto indica a Python "Ignora esto por ahora, el código está en construcción".</li>
+                        <li><strong>Llamadas en Cascada (Anidadas):</strong> Crea dos funciones: <code>checar_sistema()</code> y <code>iniciar_vuelo()</code>. Dentro de <code>iniciar_vuelo()</code> llama a <code>checar_sistema()</code>. En tu script principal, solo necesitas llamar a <code>iniciar_vuelo()</code> para que se dispare una reacción en cadena.</li>
+                    </ol>
                 </div>
             </div>
 
-            <h3 class="font-bold text-dark mt-6 mb-2 text-lg"><i class="fa-solid fa-arrows-rotate text-secondary mr-2"></i>Recursividad de Algoritmos</h3>
-            <p class="text-sm text-slate-600 leading-relaxed mb-4">La recursividad ocurre cuando una función se llama a sí misma internamente. Es el pilar de algoritmos avanzados como la búsqueda de caminos para IA (Pathfinding) o fractales matemáticos. Regla de oro: Toda función recursiva debe incluir matemáticamente una <strong class="text-dark bg-yellow-200 px-1">Condición Base (Salida)</strong> para evitar sobrecargar la <em>Pila de llamadas (Stack Overflow)</em> con un bucle infinito.</p>
+            <div id="sem11" class="tab-content bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Parámetros, Argumentos e Inyección de Datos</h3>
+                    <h4 class="font-bold text-secondary mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>Parámetro:</strong> Una variable "comodín" o receptáculo que declaras entre los paréntesis al fabricar tu función (Ej. <code>def mover(velocidad):</code>). Sirve para que la función sea universal y trabaje con cualquier valor externo.</li>
+                        <li><strong>Argumento:</strong> Es el dato real, tangible, que le pasas o "inyectas" a la función al momento de llamarla. (Ej. <code>mover(50)</code>). El "50" viaja hacia el receptáculo "velocidad".</li>
+                        <li><strong>Argumentos por Defecto (Default):</strong> Permite darle un valor estándar a un parámetro por si el usuario se olvida de enviarlo. (Ej. <code>def ascender(altura=10):</code>).</li>
+                    </ul>
+
+                    <h4 class="font-bold text-secondary mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Un algoritmo de navegación que recibe órdenes directas:</strong></p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-slate-500"># 'eje_x' y 'eje_y' son PARÁMETROS. Esperan recibir datos.</span>
+<span class="text-purple-400 font-bold">def</span> <span class="text-blue-400">navegar_hacia</span>(eje_x, eje_y):
+    <span class="text-blue-400">print</span>(<span class="text-green-300">f"Ajustando pitch y roll. Trasladando a coordenadas X:{eje_x}, Y:{eje_y}."</span>)
+
+<span class="text-slate-500"># El GPS lee valores. Los pasamos como ARGUMENTOS.</span>
+<span class="text-blue-400">navegar_hacia</span>(<span class="text-orange-300">14.5</span>, <span class="text-orange-300">-2.1</span>)
+<span class="text-blue-400">navegar_hacia</span>(<span class="text-orange-300">50.0</span>, <span class="text-orange-300">10.0</span>)</pre>
+                    </div>
+
+                    <h4 class="font-bold text-secondary mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Sistema de Alertas Personalizadas (1 Parámetro):</strong> Escribe una función <code>def alerta(zona_peligro):</code>. Adentro, pon un <code>print(f"Cuidado, dron acercándose a {zona_peligro}")</code>. Luego llama a la función tres veces seguidas inyectando argumentos de texto diferentes (ej. "Edificio 1", "Torre Eléctrica", "Árbol"). Nota cómo la función se adapta a cada texto.</li>
+                        <li><strong>Calculadora Aritmética Interna (Múltiples Parámetros):</strong> Define una función <code>calc_velocidad(distancia, tiempo)</code>. Adentro, calcula la división e imprime "La velocidad resultante es X m/s". Llama a la función pasándole 100 de distancia y 5 de tiempo.</li>
+                        <li><strong>Error Común - Faltan Parámetros:</strong> Crea una función que requiera 3 parámetros (ej. latitud, longitud, altitud). Llámala desde tu script pasándole solamente 2. Observa cómo Python explota con un <code>TypeError: missing 1 required positional argument</code>. Esto protege el software de hardware defectuoso que envía datos incompletos.</li>
+                        <li><strong>Valores por Defecto (Seguros):</strong> Define una función para controlar la cámara: <code>def tomar_foto(filtro="RGB", zoom=1):</code>. Llama a la función usando parámetros vacíos <code>tomar_foto()</code>. Observa cómo asume los valores por defecto. Luego llámala inyectando parámetros específicos <code>tomar_foto("Infrarrojo", 5)</code> y nota cómo sobrescriben los valores originales.</li>
+                        <li><strong>Argumentos Nombrados (Keyword Arguments):</strong> Tienes <code>def configurar_pid(pitch, roll, yaw):</code>. Normalmente los datos se asignan en orden posicional (primero a primero, etc). Llama a la función invirtiendo el orden explícitamente mediante sus nombres de variables: <code>configurar_pid(yaw=5, pitch=2, roll=1)</code>. Útil cuando manejas funciones con 20 parámetros y no recuerdas el orden exacto.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div id="sem12" class="tab-content bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Sentencia `return` y Aislamiento de Memoria RAM (Scope)</h3>
+                    <h4 class="font-bold text-secondary mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>La instrucción <code>return</code>:</strong> Las funciones reales de ingeniería no usan <code>print()</code>. Su trabajo no es mostrar texto en pantalla, es masticar datos y "escupir" (retornar) un resultado utilizable que será atrapado por el script principal para continuar procesos matemáticos. La palabra <code>return</code> finaliza instantáneamente la función y devuelve el valor.</li>
+                        <li><strong>Ámbito Local (Local Scope):</strong> Cualquier variable creada <em>dentro</em> de una función nace y muere allí. El recolector de basura de Python purga esa memoria RAM en el momento en que la función termina su bloque de ejecución. Esto previene desbordamientos de memoria en vuelos largos.</li>
+                        <li><strong>Ámbito Global (Global Scope):</strong> Variables declaradas al aire libre en tu archivo. Viven durante toda la ejecución del script. Son accesibles para lectura dentro de cualquier función.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-secondary mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Matemática Invisible y Captura de Retornos Múltiples (Tuplas):</strong> A diferencia de C, en Python una función puede retornar varios valores simultáneamente separados por una coma.</p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-purple-400 font-bold">def</span> <span class="text-blue-400">procesar_gps_crudo</span>(trama_texto):
+    <span class="text-slate-500"># Simulando cálculos complejos...</span>
+    lat_pura = <span class="text-orange-300">19.43</span>
+    lon_pura = <span class="text-orange-300">-99.13</span>
+    alt_pura = <span class="text-orange-300">2240.0</span>
+    <span class="text-slate-500"># Regresamos 3 resultados como un misil hacia afuera</span>
+    <span class="text-purple-400 font-bold">return</span> lat_pura, lon_pura, alt_pura
+
+<span class="text-slate-500"># CAPTURA: Fuera de la función, 'atrapamos' los datos devueltos</span>
+eje_x, eje_y, altitud = <span class="text-blue-400">procesar_gps_crudo</span>(<span class="text-green-300">"data_antena"</span>)
+<span class="text-blue-400">print</span>(<span class="text-green-300">f"Navegando hacia altitud: {altitud}"</span>)</pre>
+                    </div>
+
+                    <h4 class="font-bold text-secondary mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Del Print al Return:</strong> Crea una función matemática para calcular el área a fumigar (base * altura). En lugar de usar <code>print()</code> adentro, usa <code>return resultado</code>. Fuera de la función, ejecuta <code>area_final = calcular_area(10, 20)</code>. Luego, realiza otra operación matemática con esa variable (ej. <code>area_final * 2</code>). Comprende por qué <code>return</code> permite que el dato siga existiendo y fluyendo en el software principal.</li>
+                        <li><strong>Asesino Silencioso (Dead Code):</strong> Escribe una función sencilla que retorne un número con <code>return 5</code>. Inmediatamente debajo de esa línea, pero en la misma indentación de la función, pon <code>print("Esto nunca se verá")</code>. Llama a la función. Documenta por qué el `return` actúa como un "Abort" inmediato del bloque.</li>
+                        <li><strong>Retorno Múltiple de Variables Físicas (Unpacking):</strong> Crea la función <code>def leer_giroscopio():</code>. Haz que retorne tres valores de balance ficticios: <code>return 0.1, -0.5, 0.0</code>. Afuera, absórbelos usando la sintaxis de desempaquetado automático: <code>pitch, roll, yaw = leer_giroscopio()</code>.</li>
+                        <li><strong>Violación de Scope de Memoria (NameError):</strong> Crea una función que declare localmente <code>temp_cpu = 85</code> y no retorne nada. Luego, en tu código principal (fuera de la función), intenta escribir <code>print(temp_cpu)</code>. Observa la falla de compilación y explica por qué la variable local fue triturada por la RAM al acabar la función.</li>
+                        <li><strong>Módulo de Intervención Boolean:</strong> Construye <code>def verificar_seguridad(viento):</code>. Si el viento es > 20, <code>return False</code>. Si no, <code>return True</code>. Afuera usa un `if` que reciba el resultado directo de la llamada: <code>if verificar_seguridad(25): print("Vuelo Autorizado") else: print("Cancelado")</code>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div id="sem13" class="tab-content bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Recursividad y Utilización de Librerías Nativas</h3>
+                    <h4 class="font-bold text-secondary mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>Recursividad:</strong> Concepto avanzado. Es cuando una función, dentro de su bloque de código, se invoca a <em>sí misma</em>. Se usa ampliamente en algoritmos de Pathfinding (IA de búsqueda de rutas para drones y videojuegos) y estructuras de directorios.</li>
+                        <li><strong>Stack Overflow (Desbordamiento de Pila):</strong> Ocurre cuando un código recursivo no tiene límite, se llama a sí mismo miles de veces y agota toda la memoria RAM asignada al programa, colapsándolo a nivel de hardware.</li>
+                        <li><strong>Condición Base:</strong> Una condición (generalmente un IF al inicio del bloque recursivo) que, de cumplirse, obliga a la función a aplicar un <code>return</code> seco, deteniendo la recursividad e iniciando la cascada hacia atrás de resultados.</li>
+                        <li><strong>Import (Librerías):</strong> Cargar módulos de código previamente fabricados (por Python o por ti mismo) para no tener que reinventar funciones complejas como raíces cuadradas, fechas o cálculos trigonométricos (ej. <code>import math</code>).</li>
+                    </ul>
+
+                    <h4 class="font-bold text-secondary mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Cuenta Regresiva Segura con Recursividad:</strong> El motor no usa bucle while, la función se devora a sí misma restando 1 cada vez hasta alcanzar su condición de salida.</p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-purple-400 font-bold">def</span> <span class="text-blue-400">secuencia_auto_destruccion</span>(segundos):
+    <span class="text-slate-500"># CONDICIÓN BASE - ¡Salva al CPU de morir!</span>
+    <span class="text-purple-400 font-bold">if</span> segundos <= <span class="text-orange-300">0</span>:
+        <span class="text-blue-400">print</span>(<span class="text-green-300">"PUM."</span>)
+        <span class="text-purple-400 font-bold">return</span>
+    
+    <span class="text-blue-400">print</span>(<span class="text-green-300">f"Detonando en {segundos}..."</span>)
+    <span class="text-slate-500"># LLAMADA RECURSIVA: La función se inyecta su propio parámetro menos 1</span>
+    <span class="text-blue-400">secuencia_auto_destruccion</span>(segundos - <span class="text-orange-300">1</span>)
+
+<span class="text-slate-500"># Activamos la espoleta enviando el '3' al chip.</span>
+<span class="text-blue-400">secuencia_auto_destruccion</span>(<span class="text-orange-300">3</span>)</pre>
+                    </div>
+
+                    <h4 class="font-bold text-secondary mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Forzando el Límite de la RAM:</strong> En el IDLE de Python, crea <code>def loop_infinito(): print("Intentando conectar...") ; loop_infinito()</code>. Ejecútala. Espera unos segundos y mira cómo la terminal vomita un `RecursionError: maximum recursion depth exceeded`. Acabas de experimentar el límite físico de pila de tu entorno de compilación.</li>
+                        <li><strong>Recursividad Matemático (Factorial para Mapeo Combinatorio):</strong> Desarrolla la clásica función <code>def factorial(n)</code>. Condición base: <code>if n == 1: return 1</code>. Recursividad: <code>return n * factorial(n - 1)</code>. Calcula el factorial de 5 para saber de cuántas maneras diferentes el dron puede visitar 5 waypoints.</li>
+                        <li><strong>Importando Inteligencia Nativa (Math Module):</strong> Un dron necesita saber la distancia radial desde su punto "Home" al objeto. Necesitarás el teorema de Pitágoras. Arriba del archivo pon <code>import math</code>. Crea una función normal <code>calc_radio(x, y)</code> que retorne la raíz cuadrada usando la librería C embebida de Python: <code>return math.sqrt(x**2 + y**2)</code>.</li>
+                        <li><strong>Optimización de Importación (from/import):</strong> A veces no quieres cargar un módulo entero con 100 funciones a tu pequeña placa de dron porque consume recursos. En lugar de <code>import math</code>, escribe <code>from math import pi</code>. Ahora, crea una función que calcule la circunferencia de tu hélice usando <code>print(pi * diametro)</code> sin tener que prefijar el nombre del módulo.</li>
+                        <li><strong>Librerías Propias del Sistema de Archivos:</strong> Abre la carpeta donde estás trabajando. Crea un archivo Python puro llamado <code>sensores.py</code>. Adentro define <code>def get_temperatura(): return 25</code>. Crea otro archivo nuevo llamado <code>main.py</code> en la misma carpeta. Adentro escribe <code>import sensores</code> y luego imprime el resultado llamando a <code>sensores.get_temperatura()</code>. ¡Felicidades, acabas de modularizar un proyecto multi-archivo en Python!</li>
+                    </ol>
+                </div>
+            </div>
+
         </section>
 
-        <section class="bg-green-50 p-6 rounded-2xl border border-green-200 shadow-sm">
+    </main>
+
+    <footer class="bg-slate-100 text-slate-500 py-6 text-center text-sm border-t border-slate-200 mt-auto">
+        <p>CONALEP - Docente de Programación e IA | Ciclo Escolar Actual</p>
+    </footer>
+
+    <script>
+        function openTab(tabId, btnElement) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn, [id^="btn-sem"]').forEach(btn => {
+                btn.classList.remove('text-secondary', 'border-secondary');
+                btn.classList.add('text-slate-500', 'border-transparent');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            btnElement.classList.remove('text-slate-500', 'border-transparent');
+            btnElement.classList.add('text-secondary', 'border-secondary');
+        }
+    </script>
+</body>
+</html>
