@@ -11,8 +11,10 @@
         tailwind.config = { theme: { extend: { colors: { accent: '#f59e0b', dark: '#1e293b', primary: '#2563eb' }, fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] } } } }
     </script>
     <style> 
-        body { background-color: #f8fafc; color: #334155; overflow-x: hidden; } 
-        .neon-glow { box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+        body { background-color: #ffffff; color: #334155; overflow-x: hidden; } 
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="font-sans flex flex-col min-h-screen">
@@ -32,90 +34,261 @@
 
     <main class="flex-grow max-w-5xl mx-auto w-full px-4 py-10">
         
-        <!-- Header 2.2 -->
         <header class="mb-10">
             <div class="inline-block bg-accent text-white text-xs font-bold px-3 py-1 rounded-full mb-3">40 Horas | RA 2.2</div>
             <h1 class="text-3xl font-extrabold text-dark mb-4">Estructuras de Datos y Arquitectura de Errores</h1>
-            <p class="text-lg text-slate-600">Dejamos los lenguajes estáticos atrás. En C usábamos arreglos estáticos y punteros directos a memoria. Python administra esto con su Recolector de Basura (Garbage Collector). Pasaremos las siguientes semanas manejando tipos de colecciones robustas como <strong>Listas</strong>, <strong>Tuplas</strong> y <strong>Diccionarios</strong>, y modelaremos comportamientos FIFO y LIFO.</p>
+            <p class="text-lg text-slate-600">Dejamos los lenguajes estáticos de bajo nivel atrás. En C (o en lenguajes embebidos de placas electrónicas simples) usábamos arreglos limitados y jugábamos peligrosamente con punteros directos a la memoria que crasheaban constantemente. Python administra esto con una robustez de otro nivel mediante sus colecciones nativas maestras: <strong>Listas</strong>, <strong>Tuplas</strong> y <strong>Diccionarios</strong>. Además implementaremos la armadura final del código de producción: el bloque de Try/Except.</p>
+            
+            <div class="mt-6 bg-yellow-50 border border-yellow-200 rounded-xl p-5">
+                <h3 class="font-bold text-yellow-900 mb-2"><i class="fa-solid fa-memory mr-2"></i>El paradigma del Recolector de Basura (Garbage Collector)</h3>
+                <p class="text-sm text-yellow-800 mb-2">Para estas 5 semanas finales, debes entender que estas estructuras de datos (como las Listas que crecen o se achican solas) absorben mucha RAM dinámica. Cuando tu programa ya no las ocupa, Python detecta la inactividad y ejecuta un barrido automático de fondo que destruye el dato y libera la memoria física para otros subprocesos. Esto nos permite simular estructuras como Pilas de deshacer o Colas de tareas de servidores de manera hiper-eficiente.</p>
+            </div>
         </header>
 
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-dark flex items-center"><i class="fa-solid fa-boxes-stacked text-accent mr-3"></i>Plan de Clases y Prácticas Reales</h2>
+            <p class="text-sm text-slate-500 mb-6">Navega a través de las últimas 5 semanas del semestre para desplegar la sintaxis final de Colecciones, Control LIFO/FIFO y manejo estricto de Excepciones de hardware en Python.</p>
+
+            <!-- Tab Buttons -->
+            <div class="flex overflow-x-auto border-b border-slate-200 hide-scrollbar mb-6" role="tablist">
+                <button id="btn-sem14" class="px-6 py-3 font-bold text-sm text-accent border-b-2 border-accent focus:outline-none whitespace-nowrap" onclick="openTab('sem14', this)">Semana 14</button>
+                <button id="btn-sem15" class="px-6 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-accent focus:outline-none whitespace-nowrap transition" onclick="openTab('sem15', this)">Semana 15</button>
+                <button id="btn-sem16" class="px-6 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-accent focus:outline-none whitespace-nowrap transition" onclick="openTab('sem16', this)">Semana 16</button>
+                <button id="btn-sem17" class="px-6 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-accent focus:outline-none whitespace-nowrap transition" onclick="openTab('sem17', this)">Semana 17</button>
+                <button id="btn-sem18" class="px-6 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-accent focus:outline-none whitespace-nowrap transition" onclick="openTab('sem18', this)">Semana 18</button>
+            </div>
+
+            <div id="sem14" class="tab-content active bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Listas Dinámicas (Arrays Mutables)</h3>
+                    <h4 class="font-bold text-accent mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>Listas (<code>[ ]</code>):</strong> Secuencias dinámicas que agrupan múltiples datos (de distintos tipos) en una sola variable. Pueden estirarse y encogerse en plena ejecución del programa.</li>
+                        <li><strong>Mutabilidad:</strong> Capacidad técnica de un objeto (como la Lista) de poder modificar sus valores internos, expandirse o borrarse <em>sin</em> tener que crear un clon o asignar un nuevo bloque físico en el procesador.</li>
+                        <li><strong>Índice Base-Cero:</strong> Regla sagrada en ingeniería de software. Las máquinas y Python no cuentan desde el 1. El primer elemento de una lista vive en el cajón número `[0]`, el segundo en el `[1]`, etc.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-accent mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Modificación en Tiempo de Ejecución (Runtime) de un Plan de Vuelo:</strong> Usamos métodos nativos para alterar la estructura de un Array Mutable.</p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-slate-500"># El script inicia con una lista de 2 puntos guardada en RAM</span>
+<span class="text-blue-300">ruta_gps</span> = [<span class="text-green-300">"Punto Inicial"</span>, <span class="text-green-300">"Sector de Exploración"</span>]
+
+<span class="text-slate-500"># .append() inyecta un bloque al final dinámicamente</span>
+<span class="text-blue-300">ruta_gps</span>.append(<span class="text-green-300">"Punto de Extracción"</span>) 
+
+<span class="text-slate-500"># Muta la memoria del cajón índice [0] reemplazando su texto original</span>
+<span class="text-blue-300">ruta_gps</span>[<span class="text-orange-300">0</span>] = <span class="text-green-300">"Base Militar Alpha"</span> 
+
+<span class="text-purple-400">print</span>(<span class="text-blue-300">ruta_gps</span>) 
+<span class="text-slate-500"># Salida: ['Base Militar Alpha', 'Sector de Exploración', 'Punto de Extracción']</span></pre>
+                    </div>
+
+                    <h4 class="font-bold text-accent mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Alta de Dispositivos (Append y Listas Vacías):</strong> Crea una variable `sensores = []` inicializada vacía. Luego usa un bucle for que repita 3 veces. Adentro pide al usuario con `input()` que "Registre un nuevo sensor" y usa el método `sensores.append(dato)` para llenar la lista dinámicamente. Al final, imprime la lista completa de hardware registrado.</li>
+                        <li><strong>Corte por Interferencia Falla (Sobrescritura de Índice):</strong> Declara la lista de lectura de temperatura de 4 celdas de batería: `celdas = [35.2, 36.1, 999.9, 35.8]`. El 999.9 es un error evidente de la antena en el índice 2. Escribe una línea de código que acceda al índice 2 y lo sobrescriba con el valor de la media (por ejemplo, `35.7`).</li>
+                        <li><strong>Borrado de Cola de Archivos Extraídos (Pop):</strong> Crea una lista de archivos que el dron fotográfico capturó: `fotos = ["img_1.jpg", "img_2.jpg", "img_3.jpg"]`. El método `.pop()` extrae y borra el último archivo de la RAM, y te lo entrega. Escribe `procesado = fotos.pop()`. Imprime tanto el archivo extraído (`procesado`) como la lista final que ahora debería estar más corta y liviana.</li>
+                        <li><strong>Ordenamiento Algorítmico de Rutas (Sort):</strong> Al recibir datos de un servidor externo llegan desordenados en distancias a la base: `distancias_km = [15.2, 2.1, 40.5, 8.4]`. Aplica el método nativo optimizado por el lenguaje C subyacente en Python: `distancias_km.sort()`. Imprime la lista para demostrar al cliente que ahora están organizadas de menor a mayor esfuerzo energético.</li>
+                        <li><strong>Analítica Rápida de Daños (Count):</strong> Después de un aterrizaje brusco, la computadora lee los estados de los pines de conexión y genera esta lista: `hardware_status = ['OK', 'FALLA', 'OK', 'OK', 'FALLA']`. Escribe una línea usando el método `.count('FALLA')` y guárdalo en una variable. Usa un `if` para abortar cualquier futuro despegue si el resultado es mayor a cero.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div id="sem15" class="tab-content bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Tuplas y Protección Inmutable</h3>
+                    <h4 class="font-bold text-accent mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>Tuplas (<code>( )</code>):</strong> Prima hermana de la Lista, pero diseñada bajo una arquitectura de "Solo Lectura". Se fabrican una vez y quedan selladas y comprimidas en la RAM usando paréntesis ordinarios. Son mucho más ligeras y rápidas de procesar que las listas.</li>
+                        <li><strong>Inmutabilidad:</strong> Bloqueo de escritura (Read-Only). Condición de seguridad a nivel kernel que impide a cualquier agente (ya sea un bug en tu propio código, un hackeo o un ruido de radiofrecuencia) alterar los datos sellados internamente en la tupla.</li>
+                        <li><strong>Unpacking (Desempaquetado):</strong> Mecánica sintáctica hiper-eficiente de Python para desarmar los datos encapsulados dentro de una Tupla y asignarlos instantáneamente a variables separadas en una sola línea.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-accent mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Coordenadas Base Críticas (Blindaje de Memoria):</strong> El punto de retorno a casa (Return to Home) jamás debe poder editarse en vuelo, así evitamos accidentes fatales si un bug intenta sobrescribirlo (como pasaría si usamos Listas mutables).</p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-slate-500"># Tupla de coordenada fija fabricada con paréntesis</span>
+<span class="text-blue-300">home_gps</span> = (<span class="text-orange-300">19.432</span>, <span class="text-orange-300">-99.133</span>)
+
+<span class="text-slate-500"># UNPACKING: Asigna índice 0 a 'lat' y el 1 a 'lon' simultáneamente</span>
+lat, lon = <span class="text-blue-300">home_gps</span>
+<span class="text-blue-400">print</span>(<span class="text-green-300">f"Latitud bloqueada: {lat}. Longitud de extracción: {lon}"</span>)
+
+<span class="text-slate-500"># SIMULACRO DE HACKEO O FALLA CRÍTICA</span>
+<span class="text-red-400 font-bold">home_gps</span>[<span class="text-orange-300">0</span>] = <span class="text-orange-300">20.5</span>  <span class="text-slate-500"># Python detiene el programa disparando un TypeError protector</span></pre>
+                    </div>
+
+                    <h4 class="font-bold text-accent mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Fabricando Componentes Blindados:</strong> Crea una tupla llamada `especificaciones_fisicas` que guarde tres datos inmutables y eternos del dron salido de fábrica: su modelo (string "Quad X4"), su peso máximo en gramos (entero 1500), y su voltaje de operación nominal (decimal 14.8). Imprime la tupla para ver el bloque completo sellado por paréntesis.</li>
+                        <li><strong>Provocar un Crash de Seguridad (TypeError):</strong> Trata de alterar el modelo original del dron en el índice 0 que acabas de crear mediante `especificaciones_fisicas[0] = "Hexacoptero"`. Al ejecutar el script, analiza y copia la descripción exacta del error en consola (TypeError: 'tuple' object does not support item assignment) y guárdala como comentario para recordar por qué las usamos.</li>
+                        <li><strong>Desempaquetado de Rutinas Aéreas (Unpacking):</strong> Crea un módulo <code>def escanear_terreno(): return ("Frontera Norte", 120.5, 45)</code>, el cual retorna una tupla implícita (Zona, Altitud, Tiempo Restante). Fuera de la función, atrapa y desglosa estos tres valores creando tres variables limpias: <code>ubicacion, elevacion, timer = escanear_terreno()</code>.</li>
+                        <li><strong>Iterando una Tupla de Permisos (For-In):</strong> Aunque es inmutable y no tiene `.append()` ni `.pop()`, la tupla sigue siendo un contenedor "Iterable". Declara `frecuencias_permitidas = (2.4, 5.8)`. Usa un bucle for clásico para imprimir cada frecuencia.</li>
+                        <li><strong>Matrices Bidimensionales Críticas (Tuplas anidadas):</strong> La estructura de una pista de carreras para FPV consta de varios arcos, cada uno con coordenadas en el espacio 3D (X, Y, Z). Crea una tupla maestra que en su interior contenga dos tuplas fijas simulando dos aros virtuales: `arcos_pista = ( (10, 5, 2), (20, 10, 2) )`. Usa `print(arcos_pista[1][0])` para extraer específicamente el componente X del segundo arco.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div id="sem16" class="tab-content bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Diccionarios (Mapeo por Claves) y Formato JSON</h3>
+                    <h4 class="font-bold text-accent mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>Pares Clave-Valor (Key/Value Mapping):</strong> Un diccionario de Python no usa cajones numéricos aburridos como [0], [1]. Usa etiquetas (llaves o Keys) como si fueran identificadores (ej. "bateria", "piloto"). Cuando pides el dato a través de la etiqueta, te devuelve su valor. Son la base de las bases de datos "NoSQL".</li>
+                        <li><strong>JSON (JavaScript Object Notation):</strong> El formato universal de internet mediante el cual los servidores de todo el planeta, API REST y satélites de telemetría transmiten datos serializados de texto plano. Un JSON es, en el 99% de las ocasiones lógicas, un mega Diccionario de Python disfrazado.</li>
+                        <li><strong>Hash Table:</strong> El mecanismo matemático interno que hace que buscar "temperatura" en un diccionario de 1 millón de registros sea casi instantáneo O(1), en lugar de tener que recorrer lista por lista buscando la palabra.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-accent mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Modelo de Objeto de Software para Aeronave (Telemetría de Carga):</strong></p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-slate-500"># Estructura del Diccionario con llaves (strings) y valores dinámicos</span>
+<span class="text-blue-300">dron_db</span> = {
+    <span class="text-green-300">"ID_serie"</span>: <span class="text-green-300">"MX-DRN-001"</span>,
+    <span class="text-green-300">"bateria_porcentaje"</span>: <span class="text-orange-300">85</span>,
+    <span class="text-green-300">"sensores_activos"</span>: <span class="text-orange-300">True</span>
+}
+
+<span class="text-slate-500"># Agregar nueva etiqueta (llave) en pleno vuelo por descubrimiento</span>
+<span class="text-blue-300">dron_db</span>[<span class="text-green-300">"mision_actual"</span>] = <span class="text-green-300">"Mapeo Topográfico"</span> 
+
+<span class="text-slate-500"># Actualizando el valor hash existente</span>
+<span class="text-blue-300">dron_db</span>[<span class="text-green-300">"bateria_porcentaje"</span>] -= <span class="text-orange-300">5</span>  <span class="text-slate-500"># Baja la batería a 80</span>
+
+<span class="text-purple-400">print</span>(<span class="text-blue-300">dron_db</span>[<span class="text-green-300">"mision_actual"</span>]) <span class="text-slate-500"># Salida directa: Mapeo Topográfico</span></pre>
+                    </div>
+
+                    <h4 class="font-bold text-accent mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Creación de Ficha Técnica:</strong> Escribe un diccionario llamado `telemetria` con tres llaves clave para pilotaje: `"altitud"`, `"estado_motores"`, `"velocidad_viento"`. Asígnale valores iniciales coherentes (120.5, "Encendidos", 12.3). Escribe una función de print que anuncie la altitud accediendo a `telemetria["altitud"]`.</li>
+                        <li><strong>El Riesgo del KeyError:</strong> Intenta imprimir un dato que no declaraste en el bloque anterior escribiendo `print(telemetria["acelerometro"])`. Este es un bug de compilación de los más letales en producción; si tu app no recibe el valor JSON desde internet porque se cortó el Wi-Fi, tu programa buscará la llave, no la hallará y morirá. Documenta este error.</li>
+                        <li><strong>Prevención Segura con método `.get()`:</strong> Usa la solución elegante para el problema anterior. Escribe `data_segura = telemetria.get("acelerometro", "Sensor Desconectado")`. Ahora si la llave maestra no existe, no habrá crash, sino que el valor por defecto que tú asignaste pasará suavemente a la memoria. Imprímelo.</li>
+                        <li><strong>Extracción Masiva de Bases de Datos (Iteración):</strong> Para imprimir listas de datos o llenar tablas web (HTML), iteramos diccionarios. Crea un bucle que divida cada entrada en dos variables (la etiqueta Key, y el valor Value). Escribe `for llave, valor in telemetria.items():` e imprime: `El parámetro {llave} registra el valor {valor}`.</li>
+                        <li><strong>El Mega JSON (Diccionarios Anidados Complex):</strong> Simula el clúster de conexión de una estación terrena que controla un escuadrón, declarando un diccionario principal llamado `flota` que contenga dos diccionarios más en su interior (ej. llave "Dron_Lider": {sus parámetros}, llave "Dron_Escolta": {sus parámetros}). Accede e imprime la altitud específica del Escolta usando `print(flota["Dron_Escolta"]["altitud"])`.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div id="sem17" class="tab-content bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Comportamiento Físico de Memoria: Pilas (LIFO) y Colas (FIFO)</h3>
+                    <h4 class="font-bold text-accent mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>LIFO (Last In, First Out):</strong> Modelo "Pila" (Stack) en ingeniería. Imagina platos apilados. El último dato que metes a la lista es el único que puedes sacar primero. Clásico para el botón "Deshacer" (Undo) de un editor de texto o el tracking de navegación para retroceder paso por paso en el menú de carpetas.</li>
+                        <li><strong>FIFO (First In, First Out):</strong> Modelo "Cola" (Queue). Imagina una fila del supermercado. El primer archivo o comando que llega, es el primero que debe procesarse. La arquitectura principal para servidores web o el búfer de comandos de vuelo a distancia.</li>
+                        <li><strong>Deque (Double Ended Queue):</strong> Una estructura supervitaminada de Python (importada de la librería estándar `collections`). Mientras que sacar el primer elemento de una Lista normal es increíblemente lento porque el CPU tiene que mover el resto de elementos hacia la izquierda, el <code>deque</code> permite sacar e insertar datos instantáneamente O(1) desde ambos extremos del array físico.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-accent mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Cola de procesamiento de tareas FIFO para Ground Station:</strong> Evitamos que las órdenes de vuelo se pierdan encolándolas a alta velocidad de lectura mediante `deque`.</p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-purple-400 font-bold">from</span> collections <span class="text-purple-400 font-bold">import</span> deque
+
+<span class="text-slate-500"># Inicializa la cola vacía blindada y preparada para FIFO</span>
+<span class="text-blue-300">cola_comandos</span> = deque()
+
+<span class="text-slate-500"># Llegan comandos desde el control remoto y se encolan (.append inyecta a la derecha)</span>
+<span class="text-blue-300">cola_comandos</span>.append(<span class="text-green-300">"ASCENDER_10M"</span>)
+<span class="text-blue-300">cola_comandos</span>.append(<span class="text-green-300">"GIRAR_CAMARA"</span>)
+
+<span class="text-slate-500"># El procesador extrae y ejecuta el comando MÁS VIEJO primero (Saca por la izquierda extrema)</span>
+comando_ejecutado = <span class="text-blue-300">cola_comandos</span>.popleft() 
+<span class="text-blue-400">print</span>(<span class="text-green-300">f"Procesador central ejecutando: {comando_ejecutado}"</span>) <span class="text-slate-500"># Imprime ASCENDER_10M</span></pre>
+                    </div>
+
+                    <h4 class="font-bold text-accent mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Historial de Navegación (Pila LIFO nativa):</strong> Las listas comunes de Python son excelentes Pilas. Crea `historial = []`. Simula que un dron graba sus posiciones haciendo `historial.append("Punto_A")`, luego `append("Punto_B")` y `append("Punto_C")`. Ocurre una emergencia y activas protocolo de regreso. Llama 3 veces a `print(historial.pop())` y comprueba que la ruta se deshace extrayendo C, luego B, luego A invertidamente.</li>
+                        <li><strong>Inversor Criptográfico de Cadenas (Pila):</strong> Un clásico de entrevistas de Microsoft/Google. Escribe una función que reciba una palabra. Usa un bucle for para empujar (append) cada letra individual a una lista (Stack). Luego usa un bucle while que compruebe si la lista tiene elementos, haga un `pop()` y concatene la letra extraída a un string vacío. Imprime la palabra totalmente volteada.</li>
+                        <li><strong>Carga de Cola en Servidor Local (FIFO):</strong> Importa `from collections import deque`. Crea la cola. Pide al usuario que ingrese 3 órdenes de vuelo separadas usando inputs encadenados de `append()`. Muestra la cola entera para confirmar.</li>
+                        <li><strong>Drenaje de Cola y Despacho Operativo (FIFO):</strong> Usa un bucle `while` estructurado que analice si la cola `len(cola) > 0`. Mientras haya comandos en espera, aplica `.popleft()` para extraer y guardar la tarea en una variable temporal. Imprímela y pon un delay ligero (sleep) simulando el despacho aéreo hasta dejar el procesador libre y la cola sin mensajes.</li>
+                        <li><strong>Exceso y Caída (IndexError por Vacío):</strong> Modifica el programa FIFO anterior, pero comete el error intencional de usar `.popleft()` en una cola que ya no tiene elementos y que no verificaste con un condicional if o while preventivo. Aprende a reconocer y reaccionar ante el temible error de extracción sobre memoria vacía que asola a sistemas en producción.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div id="sem18" class="tab-content bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">La Armadura Final: Control de Excepciones `Try / Except`</h3>
+                    <h4 class="font-bold text-accent mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>Excepción (Runtime Error):</strong> Un evento anómalo o falla crítica que interrumpe la ejecución normal del software mientras el procesador está corriendo. (Ej. División por cero, archivos no encontrados, o cables de sensor arrancados que envían variables vacías). En C esto causaba un temible "SegFault".</li>
+                        <li><strong>Manejador de Bloques <code>try / except</code>:</strong> En lugar de dejar que el programa implosione y el dron caiga a tierra, tú "intentas" (try) correr el bloque de riesgo. Si explota un error interno, tu bloque "except" atrapa matemáticamente esa falla antes de que colapse el proceso madre y ejecuta un protocolo alterno de contingencia limpia.</li>
+                        <li><strong>Cláusula <code>finally</code>:</strong> Segmento que se adosa al final del bloque protector. Su contenido se va a ejecutar obligatoria e incondicionalmente, no importa si el bloque try fue exitoso, o si desencadenó la explosión del código en la rama except. Perfecto para cerrar puertos de conexión con antenas e impedir fugas de memoria RAM.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-accent mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Protegiendo algoritmos de matemáticas defectuosas o inputs humanos basura:</strong> Evitamos el <code>ValueError</code> fatal.</p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-slate-500"># Bloque protegido que encapsula el input físico</span>
+<span class="text-purple-400 font-bold">try</span>:
+    <span class="text-slate-500"># Peligro: Si el usuario teclea texto (ej. "hola"), int() explota</span>
+    tiempo_vuelo = <span class="text-blue-400">int</span>(<span class="text-blue-400">input</span>(<span class="text-green-300">"Ingrese tiempo en minutos para calcular consumo:"</span>))
+    consumo = <span class="text-orange-300">100</span> / tiempo_vuelo
+    <span class="text-blue-400">print</span>(<span class="text-green-300">f"El dron gastará {consumo}% por minuto"</span>)
+
+<span class="text-slate-500"># Trampa 1: El usuario puso un cero (100 / 0 no existe en matemáticas)</span>
+<span class="text-purple-400 font-bold">except</span> <span class="text-orange-300">ZeroDivisionError</span>:
+    <span class="text-blue-400">print</span>(<span class="text-red-400 font-bold">"ERROR: El tiempo no puede ser cero. Redirigiendo cálculo..."</span>)
+
+<span class="text-slate-500"># Trampa 2: El usuario escribió letras (falla el casting de int())</span>
+<span class="text-purple-400 font-bold">except</span> <span class="text-orange-300">ValueError</span>:
+    <span class="text-blue-400">print</span>(<span class="text-red-400 font-bold">"ERROR: Ingresaste texto y el sistema requería números crudos."</span>)
+
+<span class="text-slate-500"># Ejecución obligatoria</span>
+<span class="text-purple-400 font-bold">finally</span>:
+    <span class="text-blue-400">print</span>(<span class="text-slate-500">"Liberando socket del sensor y cerrando conexión."</span>)</pre>
+                    </div>
+
+                    <h4 class="font-bold text-accent mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Blindaje de Base de Datos Cruda (KeyError):</strong> Tienes un diccionario `db_nav = {"estado": "OK", "lat": 19.4}`. Tu sistema intenta acceder al valor `db_nav["lon"]` para graficar, pero el sensor no lo mandó. Usa un bloque `try` para leer ese dato, y usa `except KeyError:` para atrapar la caída y mostrar en pantalla "Aviso al piloto: Sensor de Longitud desconectado. Pasando a vuelo visual".</li>
+                        <li><strong>El Bug de Conversión Silencioso (ValueError):</strong> Pídele al usuario por terminal la Altitud deseada (que llega como string). Abre el bloque `try` y oblígalo a un `float()`. Si digitan "cien" en vez de "100", envíalos a un `except ValueError` que setee la altitud, por defecto, a unos seguros 50 metros en lugar de colapsar la app.</li>
+                        <li><strong>Desconexión Brusca de Array de Telemetría (IndexError):</strong> Crea la lista de historial `waypoints = ["Home", "Norte"]`. Por una falla en la señal, se borra un dato y tu código intenta accesar a `waypoints[5]`. Protege la extracción con `try`. Captura la caída usando `except IndexError:` para impedir el fallo de página e imprimir "Error de vector: Waypoint fuera de rango en la memoria volátil".</li>
+                        <li><strong>Caza Genérica de Anomalías Extremas (Exception):</strong> A veces, en sistemas autónomos, ocurren desbordamientos RAM que no puedes nombrar de antemano. Haz una división por cero intencional, pero arrópala con `except Exception as error_global:`. Imprime el código crudo extraído del núcleo en una variable string para hacer un "Dump Log" diciendo `print(f"Sistema abortado por evento anómalo grave en runtime: {error_global}")`.</li>
+                        <li><strong>La Sentencia de Sentencia y Levantar el Fuego (Raise Exception):</strong> Como arquitecto, a veces tú mismo debes generar un crash controlado si un parámetro físico rompe las leyes de seguridad. Escribe una función de carga de baterías. Si el nivel recibido por el sensor excede el 100% o es menor a 0, usa `raise ValueError("Imposible. Lectura de celda LiPo totalmente corrupta.")` para hacer estallar intencionalmente un error protector en tu propio sistema antes de que se dañen los ESCs de vuelo.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
         <section class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200 mb-10">
-            <h2 class="text-2xl font-bold mb-6 text-dark border-b-2 border-slate-100 pb-3"><i class="fa-solid fa-boxes-stacked text-accent mr-2"></i>Taxonomía de Colecciones Nativas</h2>
+            <h2 class="text-2xl font-bold mb-6 text-dark border-b-2 border-slate-100 pb-3"><i class="fa-solid fa-sitemap text-accent mr-2"></i>Taxonomía Resumen de Colecciones Nativas</h2>
             
             <div class="grid md:grid-cols-3 gap-6">
-                <!-- Listas -->
                 <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl hover:shadow-md transition">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="font-bold text-lg text-dark">1. Listas <code>[ ]</code></h3>
                         <i class="fa-solid fa-list text-slate-400"></i>
                     </div>
                     <p class="text-xs text-slate-600 mb-4 h-12">Secuencias dinámicas y mutables (editables en runtime). Utilizan mucha memoria pero son muy flexibles.</p>
-                    <div class="bg-dark p-3 rounded-lg text-xs font-mono text-slate-300">
-                        <span class="text-blue-300">coords</span> = [10.1, 15.2]<br>
-                        <span class="text-blue-300">coords</span>.append(20.5)<br>
-                        <span class="text-slate-500"># Muta la memoria original</span>
-                    </div>
                 </div>
 
-                <!-- Tuplas -->
                 <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl hover:shadow-md transition">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="font-bold text-lg text-dark">2. Tuplas <code>( )</code></h3>
                         <i class="fa-solid fa-lock text-slate-400"></i>
                     </div>
                     <p class="text-xs text-slate-600 mb-4 h-12">Secuencias inmutables (solo lectura). Extremadamente rápidas en lectura. Ideales para variables críticas.</p>
-                    <div class="bg-dark p-3 rounded-lg text-xs font-mono text-slate-300">
-                        <span class="text-blue-300">home</span> = (19.43, -99.13)<br>
-                        <span class="text-red-400 font-bold">home</span><span class="text-slate-300">[0] = 20.0 </span><br>
-                        <span class="text-red-500 font-bold"># TypeError! Crash inminente.</span>
-                    </div>
                 </div>
 
-                <!-- Diccionarios -->
                 <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl hover:shadow-md transition">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="font-bold text-lg text-dark">3. Diccionarios <code>{ }</code></h3>
                         <i class="fa-solid fa-book-open text-slate-400"></i>
                     </div>
                     <p class="text-xs text-slate-600 mb-4 h-12">Pares Clave:Valor. La estructura principal para bases de datos NoSQL y para configurar objetos de software JSON.</p>
-                    <div class="bg-dark p-3 rounded-lg text-xs font-mono text-slate-300">
-                        <span class="text-blue-300">dron</span> = {"bat": 80, "vel": 12}<br>
-                        <span class="text-blue-300">dron</span>["bat"] -= 10<br>
-                        <span class="text-slate-500"># El valor se actualiza directo por hash</span>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="grid md:grid-cols-2 gap-6 mb-12">
-            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200 hover:shadow-lg transition-shadow">
-                <h2 class="text-xl font-bold mb-4"><i class="fa-solid fa-layer-group text-accent mr-2"></i>Stacks (LIFO) & Queues (FIFO)</h2>
-                <p class="text-sm mb-4 text-slate-600">Modelar abstracciones físicas es parte de la ingeniería de software. <strong>LIFO</strong> (Last In, First Out) simula el historial de navegación (deshacer paso). <strong>FIFO</strong> (First In, First Out) procesa colas de tareas o peticiones de red.</p>
-                <div class="bg-dark p-4 rounded-xl font-mono text-xs text-slate-300 border border-slate-700">
-                    <span class="text-slate-500"># Pila (LIFO) usando una Lista nativa</span><br>
-                    historial = []<br>
-                    historial.append("GPS_Punto_1")<br>
-                    historial.append("GPS_Punto_2")<br>
-                    reversa = historial.<span class="text-blue-400 font-bold">pop()</span> <span class="text-slate-400"># Saca el Punto_2</span>
-                </div>
-            </div>
-            
-            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200 hover:shadow-lg transition-shadow">
-                <h2 class="text-xl font-bold mb-4"><i class="fa-solid fa-shield-halved text-accent mr-2"></i>Arquitectura Try/Except</h2>
-                <p class="text-sm mb-4 text-slate-600">En C, atrapar errores de memoria (SegFaults) requería lógica manual. En Python se encapsula en manejadores de excepciones, salvando al software de un colapso total (crashing) en producción.</p>
-                <div class="bg-dark p-4 rounded-xl font-mono text-xs text-slate-300 border border-slate-700">
-                    <span class="text-purple-400 font-bold">try:</span><br>
-                    &nbsp;&nbsp;velocidad = distancia / tiempo_transcurrido<br>
-                    <span class="text-purple-400 font-bold">except</span> <span class="text-orange-300">ZeroDivisionError</span>:<br>
-                    &nbsp;&nbsp;<span class="text-blue-400">print</span>("Error: División por cero (sensor fallido).")<br>
-                    <span class="text-purple-400 font-bold">finally:</span><br>
-                    &nbsp;&nbsp;<span class="text-blue-400">print</span>("Liberando socket de memoria...") <span class="text-slate-500"># Se ejecuta siempre</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- PRÁCTICA FINAL INTEGRADORA -->
-        <section class="bg-dark p-8 md:p-10 rounded-3xl neon-glow text-white border border-slate-700 shadow-2xl relative overflow-hidden">
+        <section class="bg-dark p-8 md:p-10 rounded-3xl text-white border border-slate-700 shadow-2xl relative overflow-hidden">
             <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSI+PC9yZWN0Pgo8cGF0aCBkPSJNMCAwIEwyMCAwIEwyMCAyMCBMMCAyMCBaIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=')] opacity-20 pointer-events-none"></div>
             
             <div class="relative z-10">
@@ -124,44 +297,48 @@
                         <i class="fa-solid fa-terminal text-4xl text-accent"></i>
                     </div>
                     <div>
-                        <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Proyecto Integrador Semestral</h2>
-                        <p class="text-sm md:text-base text-slate-400 font-mono mt-1">Integra: Variables + Bucles While/For + def (Funciones) + Colas FIFO + Try/Except.</p>
+                        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-accent">Proyecto Integrador Semestral (Desafío)</h2>
+                        <p class="text-sm md:text-base text-slate-400 font-mono mt-1">Sintetiza: Variables + Colecciones FIFO/LIFO + Bucles For/While + Funciones Def + Try/Except.</p>
                     </div>
                 </div>
 
-                <p class="text-slate-300 mb-6 text-sm md:text-base max-w-3xl leading-relaxed">Analiza el código maestro. Este bloque consolida el trabajo de todo el semestre. Simula la recepción asíncrona de coordenadas de vuelo de un cliente en una <strong>Cola (FIFO)</strong>. El programa las procesa <em>iterativamente</em> llamando a una <strong>función encapsulada</strong>, la cual cuenta con una estricta <strong>validación de errores</strong> para garantizar que el hardware responda adecuadamente.</p>
-                qDisplay.innerHTML = '<span class="text-slate-500 italic">Cola vacía</span>';
-                return;
-            }
-            myQueue.forEach(item => {
-                const el = document.createElement('span');
-                el.className = 'bg-primary/20 text-blue-300 px-2 py-1 rounded border border-primary/30 shrink-0';
-                el.innerText = item;
-                qDisplay.appendChild(el);
+                <p class="text-slate-300 mb-6 text-sm md:text-base max-w-3xl leading-relaxed">Para aprobar y dominar este semestre de 126 horas, deberán desarrollar de manera individual un <strong>Script Central en Python IDLE</strong> que englobe la totalidad de las metodologías aprendidas. No requerirán interfaces gráficas; toda la acción de telemetría y error ocurrirá en la consola. Este es su rito de paso hacia el software profesional.</p>
+
+                <div class="bg-slate-900 border border-slate-600 rounded-xl p-6 mb-6">
+                    <h3 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-clipboard-list text-accent mr-2"></i>Requerimientos de Arquitectura del Software:</h3>
+                    <ul class="list-disc ml-6 space-y-3 text-sm text-slate-400">
+                        <li>Deberás importar y establecer una <strong>Cola (FIFO)</strong> usando <code>collections.deque</code> que actúe como el búfer principal para simular la recepción asíncrona de 5 comandos de vuelo encolados.</li>
+                        <li>Deberás crear un <strong>Diccionario maestro (JSON)</strong> que contenga el estado de hardware del dron (batería, altitud base y estado de motores).</li>
+                        <li>Diseñarás una <strong>Función Encapsulada <code>def procesar_paquete()</code></strong>. Esta función será llamada internamente por el bucle central de despachos.</li>
+                        <li>Implementarás un <strong>Bucle <code>while</code></strong> que extraiga implacablemente (usando <code>.popleft()</code>) las peticiones de la cola y las envíe a la función para ser procesadas, hasta dejar la cola totalmente vacía.</li>
+                        <li>Todo el bloque de cálculo de batería o velocidad que programes dentro de la función <code>def</code> deberá estar blindado con bloques <strong><code>try/except ValueError</code> y <code>ZeroDivisionError</code></strong>, previniendo que el software crashee al recibir datos corrompidos por parte del comando remoto.</li>
+                        <li>La función debe devolver un resultado limpio usando <strong><code>return</code></strong> que luego se imprima con F-Strings en la consola base.</li>
+                    </ul>
+                </div>
+                
+                <p class="font-bold text-accent text-center mt-8 uppercase tracking-widest text-sm"><i class="fa-solid fa-code mr-2"></i>Compilación Exitosa. Cierre de Semestre.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-100 text-slate-500 py-6 text-center text-sm border-t border-slate-200 mt-auto">
+        <p>CONALEP - Docente de Programación e IA | Ciclo Escolar Actual</p>
+    </footer>
+
+    <script>
+        function openTab(tabId, btnElement) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
             });
-        }
-
-        function addQueue() {
-            const input = document.getElementById('newDest');
-            const val = input.value.trim();
-            if(val) {
-                myQueue.push(val); // append() in python
-                logDisplay.innerHTML += `<br>> Añadido a la cola: ${val}`;
-                input.value = '';
-                renderQueue();
-                logDisplay.scrollTop = logDisplay.scrollHeight;
-            }
-        }
-
-        function popQueue() {
-            if(myQueue.length > 0) {
-                const procesado = myQueue.shift(); // popleft() in python deque
-                logDisplay.innerHTML += `<br>> <span class="text-accent">procesar_entrega('${procesado}')</span> -> Navegando hacia: ${procesado}`;
-                renderQueue();
-            } else {
-                logDisplay.innerHTML += `<br>> <span class="text-red-400">La cola está vacía. Fin de programa.</span>`;
-            }
-            logDisplay.scrollTop = logDisplay.scrollHeight;
+            document.querySelectorAll('.tab-btn, [id^="btn-sem"]').forEach(btn => {
+                btn.classList.remove('text-accent', 'border-accent');
+                btn.classList.add('text-slate-500', 'border-transparent');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            btnElement.classList.remove('text-slate-500', 'border-transparent');
+            btnElement.classList.add('text-accent', 'border-accent');
         }
     </script>
 </body>
