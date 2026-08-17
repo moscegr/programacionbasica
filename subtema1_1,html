@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subtema 1.1 | Python</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] },
+                    colors: { primary: '#2563eb', dark: '#1e293b' }
+                }
+            }
+        }
+    </script>
+    <style> body { background-color: #f8fafc; color: #334155; } </style>
+</head>
+<body class="font-sans antialiased flex flex-col min-h-screen">
+
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
+            <div class="flex items-center gap-2">
+                <i class="fa-brands fa-python text-2xl text-primary"></i>
+                <span class="font-bold text-lg text-dark">Subtema 1.1</span>
+            </div>
+            <div class="space-x-4">
+                <a href="index.html" class="text-sm text-slate-500 hover:text-primary transition"><i class="fa-solid fa-home"></i> Inicio</a>
+                <a href="tema1_2.html" class="text-sm text-primary font-bold transition">Siguiente <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Toasts para interacción -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-dark text-white px-6 py-3 rounded-lg shadow-lg transform transition-transform translate-y-20 opacity-0 z-50">
+        <span id="toast-msg"></span>
+    </div>
+
+    <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-10">
+        <header class="mb-10">
+            <div class="inline-block bg-primary text-white text-xs font-bold px-3 py-1 rounded-full mb-3">40 Horas | RA 1.1</div>
+            <h1 class="text-3xl font-extrabold text-dark mb-4">Fundamentos y Python Básico</h1>
+            <p class="text-lg text-slate-600">Pasamos del Lenguaje C a Python. Aprenderemos cómo diseñar la lógica antes de programar y cómo declarar nuestros primeros datos en el entorno de desarrollo.</p>
+        </header>
+
+        <section class="mb-12 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+            <h2 class="text-xl font-bold mb-4 text-dark border-b pb-2"><i class="fa-solid fa-brain text-primary mr-2"></i>1. Algoritmia y Pseudocódigo</h2>
+            <p class="mb-4">Antes de escribir código, diseñamos la solución. Un <strong>Algoritmo</strong> es una serie de pasos lógicos finitos para resolver un problema. Lo representamos gráficamente mediante <strong>Diagramas de Flujo</strong> o textualmente en <strong>Pseudocódigo</strong>.</p>
+            <div class="bg-slate-50 p-4 rounded-lg font-mono text-sm border border-slate-200 text-slate-700">
+                1. INICIO<br>
+                2. LEER nivel_bateria<br>
+                3. SI nivel_bateria < 20% ENTONCES<br>
+                4. &nbsp;&nbsp;&nbsp;RETORNAR_A_BASE()<br>
+                5. SINO<br>
+                6. &nbsp;&nbsp;&nbsp;CONTINUAR_VUELO()<br>
+                7. FIN
+            </div>
+        </section>
+
+        <section class="mb-12 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+            <h2 class="text-xl font-bold mb-4 text-dark border-b pb-2"><i class="fa-brands fa-python text-primary mr-2"></i>2. Sintaxis y Tipos de Datos en Python</h2>
+            <p class="mb-4">A diferencia de C, Python es de <strong>tipado dinámico</strong>. No necesitamos declarar si una variable es entera o flotante, Python lo infiere automáticamente. Ya no usamos <code>int</code>, <code>float</code> o <code>char</code> en la declaración explícita.</p>
+            
+            <div class="bg-dark rounded-lg overflow-hidden mb-6">
+                <div class="bg-slate-800 px-4 py-2 text-xs text-slate-400 font-mono flex justify-between">
+                    <span>telemetria_dron.py</span>
+                </div>
+                <div class="p-4 font-mono text-sm text-slate-300 overflow-x-auto">
+<pre><span class="text-slate-500"># Comentarios en Python inician con #</span>
+<span class="text-blue-400">altitud</span> = <span class="text-orange-300">120.5</span>      <span class="text-slate-500"># float (decimal)</span>
+<span class="text-blue-400">motores_activos</span> = <span class="text-orange-300">4</span>  <span class="text-slate-500"># int (entero)</span>
+<span class="text-blue-400">estado</span> = <span class="text-green-400">"En vuelo"</span>  <span class="text-slate-500"># str (cadena de texto)</span>
+<span class="text-blue-400">bateria_baja</span> = <span class="text-orange-300">False</span> <span class="text-slate-500"># bool (booleano)</span>
+
+<span class="text-purple-400">print</span>(<span class="text-green-400">"El dron está a"</span>, altitud, <span class="text-green-400">"metros."</span>)</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+            <h2 class="text-xl font-bold mb-4 text-dark border-b pb-2"><i class="fa-solid fa-calculator text-primary mr-2"></i>3. Operadores y Expresiones Computacionales</h2>
+            <p class="mb-4 text-slate-600">El procesamiento de la información requiere manipular datos en la unidad aritmético-lógica de la computadora. En Python, utilizamos operadores con una sintaxis limpia. Dominar la precedencia de estos operadores consumirá gran parte de nuestras primeras 40 horas.</p>
+            
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+                <div class="bg-slate-50 p-4 rounded border border-slate-200">
+                    <h3 class="font-bold text-primary mb-2">Aritméticos (Cálculo)</h3>
+                    <ul class="text-sm text-slate-700 space-y-1 font-mono">
+                        <li><span class="text-blue-600 font-bold">+</span> : Suma</li>
+                        <li><span class="text-blue-600 font-bold">-</span> : Resta</li>
+                        <li><span class="text-blue-600 font-bold">*</span> : Multiplicación</li>
+                        <li><span class="text-blue-600 font-bold">/</span> : División (Retorna float)</li>
+                        <li><span class="text-blue-600 font-bold">//</span>: División Entera (Descarta decimales)</li>
+                        <li><span class="text-blue-600 font-bold">%</span> : Módulo (Residuo de división)</li>
+                        <li><span class="text-blue-600 font-bold">**</span>: Potencia (Ej: 2**3 = 8)</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-50 p-4 rounded border border-slate-200">
+                    <h3 class="font-bold text-primary mb-2">Lógicos y Relacionales (Evaluación)</h3>
+                    <ul class="text-sm text-slate-700 space-y-1 font-mono">
+                        <li><span class="text-blue-600 font-bold">==</span> : Igual a (¡No confundir con '=' de asignación!)</li>
+                        <li><span class="text-blue-600 font-bold">!=</span> : Diferente de</li>
+                        <li><span class="text-blue-600 font-bold">>, <, >=, <=</span> : Mayores y Menores</li>
+                        <li><span class="text-purple-600 font-bold">and</span>: Y lógico (C: &&) - Ambas verdaderas</li>
+                        <li><span class="text-purple-600 font-bold">or</span> : O lógico (C: ||) - Al menos una verdadera</li>
+                        <li><span class="text-purple-600 font-bold">not</span>: Negación (C: !) - Invierte el valor</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-slate-800 p-5 rounded-xl text-white shadow-inner">
+                <h3 class="font-bold mb-3 text-accent"><i class="fa-solid fa-microchip mr-2"></i>Laboratorio Interactivo: Motor de Cálculo y Telemetría</h3>
+                <p class="text-sm text-slate-300 mb-4">Calcularemos la distancia restante de un dron basándonos en operadores. Ingresa los valores simulando la función nativa <code>input()</code> de Python y observa cómo el script procesa la lógica algorítmica.</p>
+                <div class="flex flex-wrap gap-4 items-end mb-4">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Meta a Recorrer (m)</label>
+                        <input type="number" id="distTotal" value="2500" class="w-32 p-2 bg-slate-900 border border-slate-600 rounded focus:border-primary focus:outline-none text-white font-mono text-sm shadow-inner transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Velocidad Dron (m/s)</label>
+                        <input type="number" id="velDron" value="18.5" class="w-32 p-2 bg-slate-900 border border-slate-600 rounded focus:border-primary focus:outline-none text-white font-mono text-sm shadow-inner transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Tiempo vuelo (s)</label>
+                        <input type="number" id="tiempVuelo" value="120" class="w-32 p-2 bg-slate-900 border border-slate-600 rounded focus:border-primary focus:outline-none text-white font-mono text-sm shadow-inner transition">
+                    </div>
+                    <button onclick="calcLab1()" class="px-5 py-2 bg-primary hover:bg-blue-500 rounded font-bold shadow-md transition text-sm flex items-center gap-2"><i class="fa-solid fa-play"></i> Ejecutar Script</button>
+                </div>
+                <pre id="lab1-out" class="bg-black p-4 rounded-lg text-green-400 font-mono text-xs hidden shadow-inner overflow-x-auto leading-relaxed"></pre>
+            </div>
+        </section>
+
+        <section class="bg-blue-50 p-6 rounded-2xl border border-blue-200">
+            <h3 class="text-lg font-bold text-blue-900 mb-3"><i class="fa-solid fa-gamepad mr-2"></i>Ejercicio Dinámico: Tipado Dinámico</h3>
+            <p class="text-sm text-blue-800 mb-4">¿Qué tipo de dato de Python le asignarías a la coordenada GPS "19.5432, -99.201"?</p>
+            
+            <div class="flex flex-wrap gap-3">
+                <button onclick="checkAnswer('int')" class="btn-opt px-4 py-2 bg-white border border-slate-300 rounded shadow-sm hover:bg-blue-100 transition">int (Entero)</button>
+                <button onclick="checkAnswer('float')" class="btn-opt px-4 py-2 bg-white border border-slate-300 rounded shadow-sm hover:bg-blue-100 transition">float (Decimal)</button>
+                <button onclick="checkAnswer('str')" class="btn-opt px-4 py-2 bg-white border border-slate-300 rounded shadow-sm hover:bg-blue-100 transition">str (Texto)</button>
+            </div>
+            <div id="feedback" class="mt-4 text-sm font-semibold hidden"></div>
+        </section>
+    </main>
+
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3000);
+        }
+
+        function checkAnswer(ans) {
+            const feedback = document.getElementById('feedback');
+            feedback.classList.remove('hidden', 'text-green-600', 'text-red-600');
+            
+            if(ans === 'float') {
+                feedback.innerText = "¡Casi! Pero como son DOS números separados por coma en un solo valor conceptual, se manejan como una cadena de texto (str) o una Tupla. En formatos simples, texto.";
+                feedback.classList.add('text-red-600');
+            } else if (ans === 'str') {
+                feedback.innerText = "¡Correcto! Una cadena de texto (String) es ideal para guardar '19.5432, -99.201' de forma básica.";
+                feedback.classList.add('text-green-600');
+                showToast("¡Evaluación 1.1.1 practicada!");
+            } else {
+                feedback.innerText = "Incorrecto. Un entero no puede guardar decimales ni comas.";
+                feedback.classList.add('text-red-600');
+            }
+        }
+
+        function calcLab1() {
+            const dt = parseFloat(document.getElementById('distTotal').value);
+            const v = parseFloat(document.getElementById('velDron').value);
+            const t = parseFloat(document.getElementById('tiempVuelo').value);
+            const out = document.getElementById('lab1-out');
+            
+            if (isNaN(dt) || isNaN(v) || isNaN(t)) {
+                out.innerText = "Error: ValueError - Tipos de datos inválidos ingresados en la interfaz de sensores.";
+                out.classList.replace('text-green-400', 'text-red-400');
+                out.classList.remove('hidden');
+                return;
+            }
+
+            const recorrida = (v * t).toFixed(2);
+            const restante = (dt - recorrida).toFixed(2);
+            const superado = parseFloat(recorrida) > dt;
+            const al_limite = parseFloat(recorrida) == dt;
+
+            out.classList.replace('text-red-400', 'text-green-400');
+            out.innerHTML = `<span class="text-slate-500"># Iniciando entorno virtual de ejecución...</span>\n`;
+            out.innerHTML += `> <span class="text-blue-300">python</span> telemetria_avanzada.py\n\n`;
+            out.innerHTML += `> <span class="text-purple-400">distancia_recorrida</span> = <span class="text-orange-300">${v}</span> * <span class="text-orange-300">${t}</span>\n`;
+            out.innerHTML += `  <span class="text-slate-400">-> Resultado: ${recorrida} metros evaluados.</span>\n\n`;
+            out.innerHTML += `> <span class="text-purple-400">distancia_restante</span> = <span class="text-orange-300">${dt}</span> - <span class="text-orange-300">${recorrida}</span>\n`;
+            out.innerHTML += `  <span class="text-slate-400">-> Faltante: ${restante} metros.</span>\n\n`;
+            out.innerHTML += `> <span class="text-purple-400">alerta_superado</span> = <span class="text-orange-300">${recorrida}</span> > <span class="text-orange-300">${dt}</span>\n`;
+            out.innerHTML += `  <span class="text-slate-400">-> Expresión evaluada como Booleano: </span><span class="font-bold ${superado ? 'text-accent' : 'text-blue-400'}">${superado ? 'True' : 'False'}</span>\n`;
+            
+            if(al_limite) {
+                out.innerHTML += `\n<span class="text-blue-400 font-bold">[INFO]</span> Precisión exacta. Destino alcanzado con margen 0.`;
+            } else if(superado) {
+                out.innerHTML += `\n<span class="text-accent font-bold">[WARNING]</span> El hardware ha sobrepasado el objetivo por ${Math.abs(restante)} metros. Iniciar frenado de emergencia.`;
+            } else {
+                out.innerHTML += `\n<span class="text-green-400 font-bold">[OK]</span> Parámetros dentro del límite. Vuelo estable continuo.`;
+            }
+            out.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
