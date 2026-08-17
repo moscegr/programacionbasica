@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programación Básica en Python | Inicio</title>
+    <title>Programación Básica Python | Inicio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
@@ -11,15 +11,12 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['Fira Code', 'monospace'],
-                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] },
                     colors: {
-                        primary: '#2563eb', // Blue 600
-                        secondary: '#16a34a', // Green 600
-                        accent: '#f59e0b', // Amber 500
-                        dark: '#1e293b' // Slate 800
+                        primary: '#2563eb', // Blue 600 (Python Blue)
+                        secondary: '#eab308', // Yellow 500 (Python Yellow)
+                        accent: '#10b981', // Emerald 500 (Success/Compile)
+                        dark: '#0f172a' // Slate 900
                     }
                 }
             }
@@ -32,110 +29,129 @@
 </head>
 <body class="font-sans antialiased flex flex-col min-h-screen">
 
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4">
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center gap-2">
                     <i class="fa-brands fa-python text-3xl text-primary"></i>
-                    <span class="font-bold text-xl tracking-tight text-dark">Python<span class="text-primary">PBAS</span></span>
+                    <span class="font-bold text-xl tracking-tight text-dark">Dev<span class="text-primary">Sec</span> PBAS-03</span>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="index.html" class="text-primary font-semibold border-b-2 border-primary py-5">Inicio</a>
-                    <a href="tema1_1.html" class="text-slate-500 hover:text-primary py-5 transition">Subtema 1.1</a>
-                    <a href="tema1_2.html" class="text-slate-500 hover:text-primary py-5 transition">Subtema 1.2</a>
-                    <a href="tema2_1.html" class="text-slate-500 hover:text-primary py-5 transition">Subtema 2.1</a>
-                    <a href="tema2_2.html" class="text-slate-500 hover:text-primary py-5 transition">Subtema 2.2</a>
+                <div class="hidden md:flex space-x-6 overflow-x-auto text-sm">
+                    <a href="index_programacion.html" class="text-primary font-semibold border-b-2 border-primary py-5 whitespace-nowrap">Inicio</a>
+                    <a href="tema1_1.html" class="text-slate-500 hover:text-primary py-5 transition whitespace-nowrap">RA 1.1</a>
+                    <a href="tema1_2.html" class="text-slate-500 hover:text-primary py-5 transition whitespace-nowrap">RA 1.2</a>
+                    <a href="tema2_1.html" class="text-slate-500 hover:text-primary py-5 transition whitespace-nowrap">RA 2.1</a>
+                    <a href="tema2_2.html" class="text-slate-500 hover:text-primary py-5 transition whitespace-nowrap">RA 2.2</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="flex-grow max-w-6xl mx-auto w-full px-4 py-10">
-        
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 py-10">
         <header class="text-center mb-16">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-dark mb-4">Programación Básica <span class="text-primary">CONALEP</span></h1>
-            <p class="text-xl text-slate-500 max-w-3xl mx-auto">Adaptación a Python para el Desarrollo en Pilotaje de Drones e Informática. 126 Horas | 7 Horas/Semana.</p>
-            <div class="mt-6 inline-block bg-blue-50 border border-blue-200 rounded-lg p-4 text-left shadow-sm">
-                <p class="text-sm text-blue-800 font-medium"><i class="fa-solid fa-chalkboard-user mr-2"></i>Mensaje del Docente:</p>
-                <p class="text-sm text-slate-600 mt-1">¡Bienvenidos! En este semestre dejaremos la teoría aburrida atrás. Programar en Python es como darle instrucciones precisas a un asistente muy rápido pero sin iniciativa (la computadora o el dron). Su trabajo es pensar lógicamente; el de la máquina, ejecutar. Trabajaremos <strong>7 horas a la semana (126h totales) divididas en 18 semanas de aprendizaje práctico. Utilizaremos entornos profesionales: IDLE de Python para código de hardware/scripting puro, y Google Colab para análisis en la nube e iteraciones rápidas.</strong></p>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-dark mb-4">Programación Básica en <span class="text-primary">Python</span></h1>
+            <p class="text-xl text-slate-500 max-w-3xl mx-auto">CONALEP - Formación en Informática y Drones. 126 Horas Semestrales | 7 Horas/Semana.</p>
+            <div class="mt-8 inline-block bg-blue-50 border border-blue-200 rounded-xl p-6 text-left shadow-sm max-w-4xl">
+                <p class="text-sm text-blue-800 font-bold mb-2"><i class="fa-solid fa-terminal mr-2"></i>Mensaje del Docente:</p>
+                <p class="text-sm text-slate-700 leading-relaxed">¡Bienvenidos a la matriz! La programación no es memorizar comandos, es aprender a <strong>pensar de forma estructurada</strong>. Durante estas 126 horas utilizaremos Python, el lenguaje líder en el mundo de la Inteligencia Artificial y la automatización de hardware. Pasaremos de diagramas de flujo en papel a ejecutar scripts reales en Google Colab y Python IDLE. Aprenderán a procesar datos, tomar decisiones lógicas con el CPU y dominar las estructuras de memoria.</p>
             </div>
         </header>
 
-        <section class="mb-16 bg-white p-8 rounded-2xl shadow-sm border border-slate-200 relative overflow-hidden">
-            <div class="absolute top-0 right-0 bg-primary w-2 h-full"></div>
-            <h2 class="text-2xl font-bold mb-6 text-dark"><i class="fa-solid fa-graduation-cap text-primary mr-2"></i>Metodología Técnica de las 126 Horas</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 hover:shadow-md transition">
-                    <i class="fa-solid fa-laptop-code text-3xl text-primary mb-3"></i>
-                    <h3 class="font-bold text-lg text-dark mb-2">1. Ingeniería Práctica (70%)</h3>
-                    <p class="text-sm text-slate-600">Aprenderemos haciendo. Menos lectura pasiva, más ejecución de código en el intérprete de Python. Desarrollaremos scripts semanales orientados al procesamiento de datos, IA y automatización de telemetría.</p>
-                </div>
-                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 hover:shadow-md transition">
-                    <i class="fa-solid fa-bug-slash text-3xl text-primary mb-3"></i>
-                    <h3 class="font-bold text-lg text-dark mb-2">2. Debugging & Coevaluación</h3>
-                    <p class="text-sm text-slate-600">Identificar y solucionar errores lógicos (bugs) en código ajeno es la habilidad más demandada en un desarrollador de software profesional y en el pilotaje algorítmico.</p>
-                </div>
-                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 hover:shadow-md transition">
-                    <i class="fa-solid fa-rocket text-3xl text-primary mb-3"></i>
-                    <h3 class="font-bold text-lg text-dark mb-2">3. Integración de Sistemas</h3>
-                    <p class="text-sm text-slate-600">Al final del semestre, uniremos variables, operadores, bucles for/while, funciones encapsuladas y colecciones (FIFO/LIFO) en prácticas de integración profunda.</p>
-                </div>
-            </div>
-        </section>
-
-        <h2 class="text-2xl font-bold mb-8 border-b-2 border-slate-200 pb-2"><i class="fa-solid fa-map-location-dot text-primary mr-2"></i>Mapa del Semestre</h2>
+        <h2 class="text-2xl font-bold mb-8 border-b-2 border-slate-200 pb-2"><i class="fa-solid fa-sitemap text-primary mr-2"></i>Mapa Táctico y Temario del Semestre (18 Semanas)</h2>
         
         <div class="grid md:grid-cols-2 gap-8">
             <!-- Unidad 1 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-                <h3 class="text-xl font-bold text-dark mb-2"><span class="bg-primary text-white text-xs px-2 py-1 rounded mr-2">Unidad 1</span> Fundamentos (45%)</h3>
-                <p class="text-sm text-slate-500 mb-6">60 Horas enfocadas en la lógica y sintaxis base de Python.</p>
+            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm relative">
+                <div class="absolute top-0 right-8 bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-b-lg">Unidad 1 (60 hrs)</div>
+                <h3 class="text-xl font-bold text-dark mb-2 mt-4">Fundamentos y Lógica Estructural</h3>
+                <p class="text-sm text-slate-500 mb-6">De la idea al algoritmo, y del algoritmo al código fuente interactivo.</p>
                 
                 <div class="space-y-4">
-                    <a href="tema1_1.html" class="block bg-slate-50 p-4 rounded-xl border border-slate-200 card-hover transition duration-300">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h4 class="font-bold text-primary text-md">1.1 Variables y Tipos de Datos</h4>
-                                <p class="text-xs text-slate-500 mt-1">Semanas 1 a 6. Entornos (IDLE/Colab), Enteros, Strings. (40 hrs)</p>
+                    <a href="tema1_1.html" class="block bg-slate-50 p-5 rounded-2xl border border-slate-200 card-hover transition duration-300">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1 pr-4">
+                                <h4 class="font-bold text-primary text-md">RA 1.1 Estructura General y Datos</h4>
+                                <p class="text-xs text-slate-500 mt-1 mb-3 font-mono">Semanas 1 a 6 (40 hrs).</p>
+                                <div class="bg-white p-3 rounded-lg border border-slate-200">
+                                    <p class="text-xs font-bold text-slate-700 mb-2 border-b pb-1">Temario Resumido:</p>
+                                    <ul class="text-xs text-slate-600 list-disc ml-4 space-y-1">
+                                        <li>Algoritmia: Pseudocódigo y Diagramas de Flujo.</li>
+                                        <li>Entornos de Desarrollo: IDLE, Compiladores y Google Colab.</li>
+                                        <li>Tipos de Datos Nativos: <code class="bg-slate-100 px-1 text-primary">int</code>, <code class="bg-slate-100 px-1 text-primary">float</code>, <code class="bg-slate-100 px-1 text-primary">str</code>.</li>
+                                        <li>Operadores Aritméticos, Relacionales y Lógicos (AND/OR).</li>
+                                        <li>Entrada y Salida estándar (<code class="bg-slate-100 px-1 text-primary">print()</code> e <code class="bg-slate-100 px-1 text-primary">input()</code>).</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <i class="fa-solid fa-arrow-right text-slate-400"></i>
+                            <i class="fa-solid fa-arrow-right text-slate-400 mt-1"></i>
                         </div>
                     </a>
-                    <a href="tema1_2.html" class="block bg-slate-50 p-4 rounded-xl border border-slate-200 card-hover transition duration-300">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h4 class="font-bold text-primary text-md">1.2 Estructuras de Control</h4>
-                                <p class="text-xs text-slate-500 mt-1">Semanas 7 a 9. Condicionales (if) y Ciclos (for, while). (20 hrs)</p>
+                    <a href="tema1_2.html" class="block bg-slate-50 p-5 rounded-2xl border border-slate-200 card-hover transition duration-300">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1 pr-4">
+                                <h4 class="font-bold text-primary text-md">RA 1.2 Control de Flujo</h4>
+                                <p class="text-xs text-slate-500 mt-1 mb-3 font-mono">Semanas 7 a 9 (20 hrs).</p>
+                                <div class="bg-white p-3 rounded-lg border border-slate-200">
+                                    <p class="text-xs font-bold text-slate-700 mb-2 border-b pb-1">Temario Resumido:</p>
+                                    <ul class="text-xs text-slate-600 list-disc ml-4 space-y-1">
+                                        <li>Reglas de Indentación estricta en Python.</li>
+                                        <li>Estructuras de Decisión: <code class="bg-slate-100 px-1 text-primary">if</code>, <code class="bg-slate-100 px-1 text-primary">elif</code>, <code class="bg-slate-100 px-1 text-primary">else</code>.</li>
+                                        <li>Ciclos Definidos: Bucle <code class="bg-slate-100 px-1 text-primary">for</code> y rangos.</li>
+                                        <li>Ciclos Indefinidos: Bucle <code class="bg-slate-100 px-1 text-primary">while</code>.</li>
+                                        <li>Alteración de Flujo: <code class="bg-slate-100 px-1 text-primary">break</code>, <code class="bg-slate-100 px-1 text-primary">continue</code> y control de ciclos infinitos.</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <i class="fa-solid fa-arrow-right text-slate-400"></i>
+                            <i class="fa-solid fa-arrow-right text-slate-400 mt-1"></i>
                         </div>
                     </a>
                 </div>
             </div>
 
             <!-- Unidad 2 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-                <h3 class="text-xl font-bold text-dark mb-2"><span class="bg-secondary text-white text-xs px-2 py-1 rounded mr-2">Unidad 2</span> Modularidad y Datos (55%)</h3>
-                <p class="text-sm text-slate-500 mb-6">66 Horas construyendo sistemas robustos y estructuras complejas.</p>
+            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm relative">
+                <div class="absolute top-0 right-8 bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-b-lg">Unidad 2 (66 hrs)</div>
+                <h3 class="text-xl font-bold text-dark mb-2 mt-4">Funciones y Memoria Dinámica</h3>
+                <p class="text-sm text-slate-500 mb-6">Programación modular, colecciones de datos y manejo de excepciones.</p>
                 
                 <div class="space-y-4">
-                    <a href="tema2_1.html" class="block bg-slate-50 p-4 rounded-xl border border-slate-200 card-hover transition duration-300">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h4 class="font-bold text-secondary text-md">2.1 Funciones (def)</h4>
-                                <p class="text-xs text-slate-500 mt-1">Semanas 10 a 13. DRY, Parámetros, Scope de Memoria RAM. (26 hrs)</p>
+                    <a href="tema2_1.html" class="block bg-slate-50 p-5 rounded-2xl border border-slate-200 card-hover transition duration-300">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1 pr-4">
+                                <h4 class="font-bold text-secondary text-md">RA 2.1 Automatización con Funciones</h4>
+                                <p class="text-xs text-slate-500 mt-1 mb-3 font-mono">Semanas 10 a 12 (26 hrs).</p>
+                                <div class="bg-white p-3 rounded-lg border border-slate-200">
+                                    <p class="text-xs font-bold text-slate-700 mb-2 border-b pb-1">Temario Resumido:</p>
+                                    <ul class="text-xs text-slate-600 list-disc ml-4 space-y-1">
+                                        <li>Declaración de funciones personalizadas (<code class="bg-slate-100 px-1 text-secondary">def</code>).</li>
+                                        <li>Paso de parámetros (Args y Kwargs) y valores por defecto.</li>
+                                        <li>El uso del comando <code class="bg-slate-100 px-1 text-secondary">return</code>.</li>
+                                        <li>Ámbito de variables: Variables Locales vs Globales (Scope).</li>
+                                        <li>Creación e importación de Librerías / Módulos.</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <i class="fa-solid fa-arrow-right text-slate-400"></i>
+                            <i class="fa-solid fa-arrow-right text-slate-400 mt-1"></i>
                         </div>
                     </a>
-                    <a href="tema2_2.html" class="block bg-slate-50 p-4 rounded-xl border border-slate-200 card-hover transition duration-300 relative overflow-hidden">
+                    <a href="tema2_2.html" class="block bg-slate-50 p-5 rounded-2xl border border-slate-200 card-hover transition duration-300 relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-accent text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">¡PRÁCTICA FINAL!</div>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h4 class="font-bold text-secondary text-md">2.2 Estructuras de Datos</h4>
-                                <p class="text-xs text-slate-500 mt-1">Semanas 14 a 18. JSON, Pilas (LIFO), Manejo Try/Except. (40 hrs)</p>
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1 pr-4">
+                                <h4 class="font-bold text-secondary text-md">RA 2.2 Estructuras de Datos y Memoria</h4>
+                                <p class="text-xs text-slate-500 mt-1 mb-3 font-mono">Semanas 13 a 18 (40 hrs).</p>
+                                <div class="bg-white p-3 rounded-lg border border-slate-200">
+                                    <p class="text-xs font-bold text-slate-700 mb-2 border-b pb-1">Temario Resumido:</p>
+                                    <ul class="text-xs text-slate-600 list-disc ml-4 space-y-1">
+                                        <li>Estructuras Mutables: Listas (<code class="bg-slate-100 px-1 text-secondary">[]</code>).</li>
+                                        <li>Estructuras Inmutables: Tuplas (<code class="bg-slate-100 px-1 text-secondary">()</code>).</li>
+                                        <li>Pares Clave-Valor: Diccionarios (<code class="bg-slate-100 px-1 text-secondary">{}</code>).</li>
+                                        <li>Lógica de Pilas (LIFO) y Colas (FIFO).</li>
+                                        <li>Manejo de Errores: Bloques <code class="bg-slate-100 px-1 text-secondary">try - except</code> para prevención de caídas de software.</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <i class="fa-solid fa-arrow-right text-slate-400"></i>
+                            <i class="fa-solid fa-arrow-right text-slate-400 mt-1"></i>
                         </div>
                     </a>
                 </div>
@@ -143,8 +159,8 @@
         </div>
     </main>
 
-    <footer class="bg-slate-100 text-slate-500 py-6 text-center text-sm border-t border-slate-200 mt-auto">
-        <p>CONALEP - Docente de Programación e IA | Ciclo Escolar Actual</p>
+    <footer class="bg-slate-50 text-slate-500 py-8 text-center text-sm border-t border-slate-200 mt-auto">
+        <p>CONALEP - Docente de Programación Informática | Ciclo Escolar Actual</p>
     </footer>
 </body>
 </html>
