@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subtema 2.1 | Python</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { secondary: '#16a34a', dark: '#1e293b' }, fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] } } } }
+    </script>
+    <style> body { background-color: #f8fafc; color: #334155; } </style>
+</head>
+<body class="font-sans flex flex-col min-h-screen">
+
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
+            <div class="flex items-center gap-2">
+                <i class="fa-brands fa-python text-2xl text-secondary"></i>
+                <span class="font-bold text-lg text-dark">Subtema 2.1</span>
+            </div>
+            <div class="space-x-4">
+                <a href="tema1_2.html" class="text-sm text-slate-500 hover:text-secondary transition"><i class="fa-solid fa-arrow-left"></i> Atrás</a>
+                <a href="tema2_2.html" class="text-sm text-secondary font-bold transition">Siguiente <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-10">
+        <header class="mb-10">
+            <div class="inline-block bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full mb-3">26 Horas | RA 2.1</div>
+            <h1 class="text-3xl font-extrabold text-dark mb-4">Modularidad y Funciones</h1>
+            <p class="text-lg text-slate-600">Un buen programador no repite código. Aprenderemos a encapsular la lógica en bloques reutilizables llamados <strong>Funciones</strong> usando la palabra clave reservada <code>def</code>.</p>
+        </header>
+
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-10">
+            <h2 class="text-xl font-bold mb-4 text-dark border-b pb-2"><i class="fa-solid fa-box-open text-secondary mr-2"></i>Estructura de `def`</h2>
+            <p class="mb-4">A diferencia de C, no tenemos que indicar el tipo de dato que retorna la función. Python lo maneja dinámicamente.</p>
+            
+            <div class="bg-dark p-5 rounded-lg text-sm text-slate-300 font-mono mb-4 overflow-x-auto">
+<pre><span class="text-purple-400">def</span> <span class="text-blue-400">calcular_distancia</span>(vel, tiempo):
+    <span class="text-slate-500">"""Calcula la distancia recorrida en línea recta."""</span>
+    distancia = vel * tiempo
+    <span class="text-purple-400">return</span> distancia
+
+<span class="text-slate-500"># Llamando a la función (Paso de parámetros)</span>
+resultado = <span class="text-blue-400">calcular_distancia</span>(<span class="text-orange-300">15</span>, <span class="text-orange-300">3</span>)
+<span class="text-blue-400">print</span>(<span class="text-green-400">f"El dron recorrió {resultado} metros."</span>)</pre>
+            </div>
+            
+            <h2 class="text-xl font-bold mb-4 mt-8 text-dark border-b pb-2"><i class="fa-solid fa-crosshairs text-secondary mr-2"></i>Arquitectura Interna: Scope y Retornos de Tupla</h2>
+            <p class="mb-4 text-slate-600">Como ingenieros, debemos gestionar la memoria RAM de manera estricta. Las variables creadas <em>dentro</em> de un <code>def</code> son <strong>Variables Locales</strong>: existen solo mientras la función trabaja, luego son destruidas. Además, Python permite a las funciones romper las reglas de C, devolviendo múltiples variables agrupadas automáticamente en una <strong class="text-secondary">Tupla</strong>.</p>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm hover:-translate-y-1 transition duration-300">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">Retorno Múltiple</span>
+                    </div>
+                    <pre class="text-xs font-mono text-slate-700 overflow-x-auto">
+<span class="text-purple-600 font-bold">def</span> <span class="text-blue-600">obtener_coordenadas</span>():
+    latitud = 19.4326
+    longitud = -99.1332
+    <span class="text-purple-600 font-bold">return</span> latitud, longitud
+
+<span class="text-slate-500"># 'Unpacking' (Desempaquetado mágico)</span>
+y, x = <span class="text-blue-600">obtener_coordenadas</span>()
+<span class="text-blue-600">print</span>(f"Lat: {y}, Lng: {x}")</pre>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm hover:-translate-y-1 transition duration-300">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded">Contexto (Scope Local vs Global)</span>
+                    </div>
+                    <pre class="text-xs font-mono text-slate-700 overflow-x-auto">
+bat_global = 100 <span class="text-slate-500"># Nivel Global</span>
+
+<span class="text-purple-600 font-bold">def</span> <span class="text-blue-600">rutina_vuelo</span>():
+    consumo = 15 <span class="text-slate-500"># Nivel Local</span>
+    <span class="text-blue-600">print</span>(bat_global - consumo)
+
+<span class="text-blue-600">rutina_vuelo</span>()
+<span class="text-blue-600">print</span>(consumo) <span class="text-red-500 font-bold"># NameError! </span>
+<span class="text-slate-500"># 'consumo' ya fue purgado de la RAM.</span></pre>
+                </div>
+            </div>
+
+            <h3 class="font-bold text-dark mt-6 mb-2 text-lg"><i class="fa-solid fa-arrows-rotate text-secondary mr-2"></i>Recursividad de Algoritmos</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-4">La recursividad ocurre cuando una función se llama a sí misma internamente. Es el pilar de algoritmos avanzados como la búsqueda de caminos para IA (Pathfinding) o fractales matemáticos. Regla de oro: Toda función recursiva debe incluir matemáticamente una <strong class="text-dark bg-yellow-200 px-1">Condición Base (Salida)</strong> para evitar sobrecargar la <em>Pila de llamadas (Stack Overflow)</em> con un bucle infinito.</p>
+        </section>
+
+        <section class="bg-green-50 p-6 rounded-2xl border border-green-200 shadow-sm">
