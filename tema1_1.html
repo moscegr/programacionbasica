@@ -3,189 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programación Básica Python | Inicio</title>
+    <title>Subtema 1.1 | Python</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] },
-                    colors: {
-                        primary: '#2563eb', // Blue 600 (Python Blue)
-                        secondary: '#eab308', // Yellow 500 (Python Yellow)
-                        accent: '#10b981', // Emerald 500 (Success/Compile)
-                        dark: '#0f172a' // Slate 900
-                    }
+                    colors: { primary: '#2563eb', dark: '#1e293b' }
                 }
             }
         }
     </script>
-    <style>
-        body { background-color: #ffffff; color: #334155; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }
+    <style> 
+        body { background-color: #ffffff; color: #334155; } 
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="font-sans antialiased flex flex-col min-h-screen">
 
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-2">
-                    <i class="fa-brands fa-python text-3xl text-primary"></i>
-                    <span class="font-bold text-xl tracking-tight text-dark">Dev<span class="text-primary">Sec</span> PBAS-03</span>
-                </div>
-                <div class="hidden md:flex space-x-6 overflow-x-auto text-sm">
-                    <a href="index_programacion.html" class="text-primary font-semibold border-b-2 border-primary py-5 whitespace-nowrap">Inicio</a>
-                    <a href="tema1_1.html" class="text-slate-500 hover:text-primary py-5 transition whitespace-nowrap">RA 1.1</a>
-                    <a href="tema1_2.html" class="text-slate-500 hover:text-primary py-5 transition whitespace-nowrap">RA 1.2</a>
-                    <a href="tema2_1.html" class="text-slate-500 hover:text-primary py-5 transition whitespace-nowrap">RA 2.1</a>
-                    <a href="tema2_2.html" class="text-slate-500 hover:text-primary py-5 transition whitespace-nowrap">RA 2.2</a>
-                </div>
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
+            <div class="flex items-center gap-2">
+                <i class="fa-brands fa-python text-2xl text-primary"></i>
+                <span class="font-bold text-lg text-dark">Subtema 1.1</span>
+            </div>
+            <div class="space-x-4">
+                <a href="index.html" class="text-sm text-slate-500 hover:text-primary transition"><i class="fa-solid fa-home"></i> Inicio</a>
+                <a href="tema1_2.html" class="text-sm text-primary font-bold transition">Siguiente <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
     </nav>
 
-    <main class="flex-grow max-w-7xl mx-auto w-full px-4 py-10">
-        <header class="text-center mb-16">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-dark mb-4">Programación Básica en <span class="text-primary">Python</span></h1>
-            <p class="text-xl text-slate-500 max-w-3xl mx-auto">CONALEP - Formación en Informática y Drones. 126 Horas Semestrales | 7 Horas/Semana.</p>
-            <div class="mt-8 inline-block bg-blue-50 border border-blue-200 rounded-xl p-6 text-left shadow-sm max-w-4xl">
-                <p class="text-sm text-blue-800 font-bold mb-2"><i class="fa-solid fa-terminal mr-2"></i>Mensaje del Docente:</p>
-                <p class="text-sm text-slate-700 leading-relaxed">¡Bienvenidos a la matriz! La programación no es memorizar comandos, es aprender a <strong>pensar de forma estructurada</strong>. Durante estas 126 horas utilizaremos Python, el lenguaje líder en el mundo de la Inteligencia Artificial y la automatización de hardware. Pasaremos de diagramas de flujo en papel a ejecutar scripts reales en Google Colab y Python IDLE. Aprenderán a procesar datos, tomar decisiones lógicas con el CPU y dominar las estructuras de memoria.</p>
+    <main class="flex-grow max-w-5xl mx-auto w-full px-4 py-10">
+        <header class="mb-10">
+            <div class="inline-block bg-primary text-white text-xs font-bold px-3 py-1 rounded-full mb-3">40 Horas | RA 1.1</div>
+            <h1 class="text-3xl font-extrabold text-dark mb-4">Fundamentos y Python Básico</h1>
+            <p class="text-lg text-slate-600">Pasamos del Lenguaje C a Python. Aprenderemos cómo diseñar la lógica antes de programar y cómo declarar nuestros primeros datos en el entorno de desarrollo.</p>
+
+            <div class="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-5">
+                <h3 class="font-bold text-blue-900 mb-2"><i class="fa-solid fa-laptop-code mr-2"></i>Entornos de Trabajo Semanal</h3>
+                <ul class="list-disc list-inside text-sm text-blue-800 ml-4 space-y-1">
+                    <li><strong>Google Colab:</strong> Cuadernos interactivos en la nube. Excelentes para apuntes, cálculos algorítmicos rápidos y compartir código docente-alumno sin instalar nada.</li>
+                    <li><strong>Python IDLE:</strong> Entorno de Desarrollo Integrado local. Lo usaremos para entender cómo un script de texto plano (.py) es procesado por el intérprete en el CPU de nuestra máquina física.</li>
+                </ul>
             </div>
         </header>
 
-        <section class="mb-16 bg-slate-50 border border-slate-200 rounded-3xl p-8 shadow-sm">
-            <h2 class="text-2xl font-bold mb-4 text-dark"><i class="fa-solid fa-rocket text-primary mr-2"></i>Introducción al Módulo</h2>
-            <div class="space-y-4 text-slate-600 text-sm leading-relaxed">
-                <p>En el núcleo de formación profesional, el módulo de <strong>Programación Básica</strong> es tu puerta de entrada al desarrollo tecnológico. Diseñado específicamente para las carreras de Informática y Pilotaje de Drones del CONALEP, este curso te dará las bases algorítmicas necesarias para no solo consumir tecnología, sino crearla.</p>
-                <p>El enfoque de "aprender haciendo" (Hands-On) te llevará desde comprender qué es una variable y un diagrama de flujo, hasta escribir scripts capaces de tomar decisiones autónomas y procesar estructuras dinámicas de memoria. Todo esto lo aplicaremos enfocados en la resolución de problemas reales.</p>
-                <div class="grid md:grid-cols-3 gap-6 mt-8">
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center card-hover transition duration-300">
-                        <i class="fa-solid fa-brain text-4xl text-primary mb-3"></i>
-                        <h4 class="font-bold text-dark text-lg mb-2">Lógica Computacional</h4>
-                        <p class="text-xs text-slate-500">Aprenderás a pensar paso a paso (algoritmia) para resolver problemas complejos y evitar cuellos de botella.</p>
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-dark flex items-center"><i class="fa-solid fa-calendar-week text-primary mr-3"></i>Plan de Clases y Prácticas Reales</h2>
+            <p class="text-sm text-slate-500 mb-6">Selecciona la semana para acceder al contenido técnico, la lógica de resolución y los 5 ejercicios prácticos elaborados a detalle.</p>
+
+            <!-- Tab Buttons -->
+            <div class="flex overflow-x-auto border-b border-slate-200 hide-scrollbar mb-6" role="tablist">
+                <button id="btn-sem1" class="px-6 py-3 font-bold text-sm text-primary border-b-2 border-primary focus:outline-none whitespace-nowrap" onclick="openTab('sem1', this)">Semana 1 y 2</button>
+                <button id="btn-sem3" class="px-6 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-primary focus:outline-none whitespace-nowrap transition" onclick="openTab('sem3', this)">Semana 3 y 4</button>
+                <button id="btn-sem5" class="px-6 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-primary focus:outline-none whitespace-nowrap transition" onclick="openTab('sem5', this)">Semana 5 y 6</button>
+            </div>
+
+            <div id="sem1" class="tab-content active bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Algoritmia y Entornos (IDLE/Colab)</h3>
+                    <h4 class="font-bold text-primary mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>Algoritmo:</strong> Serie de pasos lógicos, finitos y no ambiguos ordenados secuencialmente para resolver un problema de ingeniería.</li>
+                        <li><strong>Pseudocódigo:</strong> Lenguaje intermedio entre el lenguaje natural humano y la sintaxis rígida de la máquina. Se usa para diseñar la lógica en papel antes de codificar.</li>
+                        <li><strong>Intérprete de Python:</strong> Software que lee tu script línea por línea y lo traduce a instrucciones de CPU en tiempo real, a diferencia de los compiladores clásicos (como en C) que traducen todo de golpe antes de ejecutar.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-primary mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Problema:</strong> Un dron agrícola debe verificar si tiene suficiente batería antes de encender motores.</p>
+                        <p class="font-mono text-xs bg-dark text-green-400 p-3 rounded mt-2">
+                            1. INICIO<br>
+                            2. LEER nivel_bateria desde sensor.<br>
+                            3. SI nivel_bateria > 20% ENTONCES<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;4. IMPRIMIR "Sistemas listos para despegue"<br>
+                            5. FIN
+                        </p>
                     </div>
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center card-hover transition duration-300">
-                        <i class="fa-solid fa-code text-4xl text-secondary mb-3"></i>
-                        <h4 class="font-bold text-dark text-lg mb-2">Codificación Real</h4>
-                        <p class="text-xs text-slate-500">Adiós a la teoría pura; escribiremos código funcional en IDLE y Colab, perdiéndole el miedo a la sintaxis y los errores.</p>
-                    </div>
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center card-hover transition duration-300">
-                        <i class="fa-brands fa-space-awesome text-4xl text-accent mb-3"></i>
-                        <h4 class="font-bold text-dark text-lg mb-2">Base para Hardware</h4>
-                        <p class="text-xs text-slate-500">Cimientos absolutos para futuras materias de domótica, bases de datos y control de sistemas aéreos (Drones).</p>
-                    </div>
+
+                    <h4 class="font-bold text-primary mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Diagrama de Flujo de Aterrizaje:</strong> Dibuja en papel (o software gráfico) el diagrama de flujo exhaustivo para el protocolo "Return to Home" (RTH) de un dron. Considera pasos como: checar GPS, elevarse a altitud segura, regresar a coordenadas, y descender.</li>
+                        <li><strong>Pseudocódigo de Carga Útil:</strong> Escribe en lenguaje estructurado el algoritmo para calcular si un dron excede su peso máximo de despegue (MTOW). Debes solicitar el peso del marco, batería y la cámara.</li>
+                        <li><strong>El Entorno Local (IDLE):</strong> Abre el IDLE de Python instalado en el laboratorio. Crea un nuevo archivo llamado <code>telemetria_basica.py</code>. Escribe la instrucción <code>print("Enlace de telemetría establecido en puerto COM3")</code>. Guarda y presiona F5 para observar cómo el intérprete ejecuta la orden en la consola física.</li>
+                        <li><strong>El Entorno Cloud (Colab):</strong> Inicia sesión en Google Colab. Crea un cuaderno interactivo. En la primera celda, escribe la operación matemática para calcular el área de un círculo de reconocimiento (ej. <code>3.1416 * 50 * 50</code>). Ejecuta la celda para que un servidor de Google procese la orden y te devuelva el resultado.</li>
+                        <li><strong>Cacería de Errores de Sintaxis:</strong> En IDLE, intenta ejecutar intencionalmente <code>print "Falla de motor"</code> (omitiendo los paréntesis obligatorios en Python 3). Analiza el texto rojo del <code>SyntaxError</code> y documenta por qué la máquina requiere una sintaxis no ambigua.</li>
+                    </ol>
                 </div>
             </div>
+
+            <div id="sem3" class="tab-content bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Variables, Tipos de Datos y Memoria RAM</h3>
+                    <h4 class="font-bold text-primary mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>Variable:</strong> Un espacio reservado y etiquetado en la memoria RAM que sirve para almacenar datos temporales que el CPU procesará.</li>
+                        <li><strong>Tipado Dinámico:</strong> A diferencia de C (tipado estático rígido), Python infiere automáticamente si un dato es texto, entero o decimal. Una variable puede cambiar de tipo durante su vida útil.</li>
+                        <li><strong>Casteo (Casting):</strong> Obligar al intérprete a convertir un tipo de dato en otro (Ej. convertir el texto "100" en el número matemático 100 usando <code>int()</code>).</li>
+                    </ul>
+
+                    <h4 class="font-bold text-primary mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Tipos de datos fundamentales en sistemas de navegación:</strong></p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-slate-500"># Asignación de memoria en Python</span>
+<span class="text-blue-300">modelo_uav</span> = <span class="text-green-300">"DJI Matrice 300"</span>  <span class="text-slate-500"># String (str) - Textos</span>
+<span class="text-blue-300">motores</span> = <span class="text-orange-300">4</span>                   <span class="text-slate-500"># Integer (int) - Enteros</span>
+<span class="text-blue-300">frecuencia_ghz</span> = <span class="text-orange-300">5.8</span>          <span class="text-slate-500"># Float - Decimales</span>
+<span class="text-blue-300">camara_activa</span> = <span class="text-orange-300">True</span>          <span class="text-slate-500"># Boolean (bool) - Banderas Lógicas</span></pre>
+                    </div>
+
+                    <h4 class="font-bold text-primary mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Declaración del Manifiesto de Vuelo:</strong> En un script de Colab, declara 4 variables que almacenen: el nombre del piloto (str), su número de licencia (int), la temperatura actual en grados Celsius (float) y si el permiso de vuelo está aprobado (bool). Imprímelas usando <code>print()</code>.</li>
+                        <li><strong>Análisis de RAM con <code>type()</code>:</strong> Crea una variable llamada <code>coordenada = "19.432, -99.133"</code>. Utiliza la instrucción <code>print(type(coordenada))</code> para averiguar cómo Python clasifica internamente este dato combinado.</li>
+                        <li><strong>Registro de Telemetría Dinámica (Input):</strong> Utiliza la función <code>input("Ingrese RPM del motor 1: ")</code> para solicitar un dato al usuario en la terminal. Guarda este dato en una variable. Por defecto, <code>input()</code> recibe todo como String.</li>
+                        <li><strong>Casteo Obligatorio para Matemáticas:</strong> Toma la variable del ejercicio anterior (String) y pásala por la función <code>int()</code> para convertirla a número entero. Intenta sumarle 500 para comprobar que el casteo matemático fue exitoso.</li>
+                        <li><strong>Reporte con F-Strings:</strong> Formatea una cadena de texto inyectando variables directamente. Declara variables de `altitud` y `velocidad`. Genera la salida: <code>print(f"ALERTA: El dron está volando a {altitud} metros con una velocidad de {velocidad} m/s.")</code>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div id="sem5" class="tab-content bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-dark border-b pb-2 mb-4">Operadores Lógicos y Aritméticos</h3>
+                    <h4 class="font-bold text-primary mb-2"><i class="fa-solid fa-book-open mr-2"></i>Términos Técnicos:</h4>
+                    <ul class="text-sm text-slate-600 list-disc ml-6 space-y-2 mb-6">
+                        <li><strong>Unidad Aritmético-Lógica (ALU):</strong> Circuito del procesador que resuelve todas las operaciones matemáticas y compuertas lógicas (AND/OR).</li>
+                        <li><strong>Operador Módulo (<code>%</code>):</strong> Calcula el residuo de una división. Extremadamente útil en programación para determinar si un valor es par o impar, o para crear rutinas alternadas.</li>
+                        <li><strong>Operadores Relacionales:</strong> Comparan dos datos (ej. <code>==, !=, >, <=</code>) y <em>siempre</em> devuelven un valor Booleano (<code>True</code> o <code>False</code>).</li>
+                    </ul>
+
+                    <h4 class="font-bold text-primary mb-2"><i class="fa-solid fa-lightbulb mr-2"></i>Lógica y Ejemplo Resuelto:</h4>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-6">
+                        <p class="mb-2"><strong>Evaluación Combinada de Sensores de Seguridad:</strong> Un dron solo puede aterrizar automáticamente si está a menos de 5 metros de altura Y su velocidad horizontal es casi nula.</p>
+                        <pre class="font-mono text-xs bg-dark text-slate-300 p-3 rounded mt-2 overflow-x-auto">
+<span class="text-blue-300">altitud</span> = <span class="text-orange-300">3.5</span>
+<span class="text-blue-300">vel_horizontal</span> = <span class="text-orange-300">0.2</span>
+<span class="text-slate-500"># Evalúa ambas condiciones con el operador AND lógico</span>
+<span class="text-blue-300">permiso_aterrizaje</span> = (<span class="text-blue-300">altitud</span> <= <span class="text-orange-300">5.0</span>) <span class="text-purple-400">and</span> (<span class="text-blue-300">vel_horizontal</span> < <span class="text-orange-300">0.5</span>)
+<span class="text-purple-400">print</span>(<span class="text-green-300">f"Aterrizaje seguro autorizado: {permiso_aterrizaje}"</span>) <span class="text-slate-500"># Salida: True</span></pre>
+                    </div>
+
+                    <h4 class="font-bold text-primary mb-3"><i class="fa-solid fa-cogs mr-2"></i>5 Ejercicios Prácticos de la Vida Real:</h4>
+                    <ol class="text-sm text-slate-700 list-decimal ml-6 space-y-4">
+                        <li><strong>Cálculo de Cobertura Agrícola:</strong> Un dron fumigador necesita mapear un terreno. Escribe un script que solicite al usuario la `base` y `altura` del terreno en metros (usando inputs casteados a float). Multiplícalos para obtener los metros cuadrados y calcula los litros de pesticida si gasta 1 litro por cada 50 metros cuadrados.</li>
+                        <li><strong>Alternancia de Cámaras (Operador Módulo):</strong> Un sistema toma fotos cada segundo. Usa el operador módulo para saber si el "segundo actual" ingresado por el usuario es par o impar (<code>segundo % 2 == 0</code>). Imprime el resultado booleano. Esto se usaría para disparar la cámara térmica en segundos pares y la RGB en impares.</li>
+                        <li><strong>Protocolo de Armado (Lógica AND):</strong> Declara dos variables booleanas: <code>palanca_baja = True</code> y <code>boton_armado = True</code>. Evalúa y muestra el resultado de usar el operador <code>and</code>. Ambas deben ser True para que el dron encienda motores.</li>
+                        <li><strong>Redundancia de Sensores (Lógica OR):</strong> Tu dron tiene un sensor LiDAR frontal y uno infrarrojo. Declara ambos con distancias simuladas. Imprime el resultado lógico de <code>distancia_lidar < 1.0 or distancia_ir < 1.0</code>. Si <em>al menos uno</em> detecta algo a menos de 1 metro, el dron debe registrar peligro (True).</li>
+                        <li><strong>Cálculo de Autonomía (División Entera):</strong> La batería total del dron otorga 137 minutos de vuelo bruto. Usa la división entera (<code>137 // 60</code>) para obtener las horas completas cerradas, y el módulo (<code>137 % 60</code>) para obtener los minutos sobrantes. Imprime: "Tiempo de vuelo: X horas y Y minutos".</li>
+                    </ol>
+                </div>
+            </div>
+
         </section>
 
-        <h2 class="text-2xl font-bold mb-8 border-b-2 border-slate-200 pb-2"><i class="fa-solid fa-sitemap text-primary mr-2"></i>Mapa Táctico y Temario del Semestre (18 Semanas)</h2>
-        
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Unidad 1 -->
-            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm relative">
-                <div class="absolute top-0 right-8 bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-b-lg">Unidad 1 (60 hrs)</div>
-                <h3 class="text-xl font-bold text-dark mb-2 mt-4">Fundamentos y Lógica Estructural</h3>
-                <p class="text-sm text-slate-500 mb-6">De la idea al algoritmo, y del algoritmo al código fuente interactivo.</p>
-                
-                <div class="space-y-4">
-                    <a href="tema1_1.html" class="block bg-slate-50 p-5 rounded-2xl border border-slate-200 card-hover transition duration-300">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1 pr-4">
-                                <h4 class="font-bold text-primary text-md">RA 1.1 Estructura General y Datos</h4>
-                                <p class="text-xs text-slate-500 mt-1 mb-3 font-mono">Semanas 1 a 6 (40 hrs).</p>
-                                <div class="bg-white p-3 rounded-lg border border-slate-200">
-                                    <p class="text-xs font-bold text-slate-700 mb-2 border-b pb-1">Temario Resumido:</p>
-                                    <ul class="text-xs text-slate-600 list-disc ml-4 space-y-1">
-                                        <li>Algoritmia: Pseudocódigo y Diagramas de Flujo.</li>
-                                        <li>Entornos de Desarrollo: IDLE, Compiladores y Google Colab.</li>
-                                        <li>Tipos de Datos Nativos: <code class="bg-slate-100 px-1 text-primary">int</code>, <code class="bg-slate-100 px-1 text-primary">float</code>, <code class="bg-slate-100 px-1 text-primary">str</code>.</li>
-                                        <li>Operadores Aritméticos, Relacionales y Lógicos (AND/OR).</li>
-                                        <li>Entrada y Salida estándar (<code class="bg-slate-100 px-1 text-primary">print()</code> e <code class="bg-slate-100 px-1 text-primary">input()</code>).</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <i class="fa-solid fa-arrow-right text-slate-400 mt-1"></i>
-                        </div>
-                    </a>
-                    <a href="tema1_2.html" class="block bg-slate-50 p-5 rounded-2xl border border-slate-200 card-hover transition duration-300">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1 pr-4">
-                                <h4 class="font-bold text-primary text-md">RA 1.2 Control de Flujo</h4>
-                                <p class="text-xs text-slate-500 mt-1 mb-3 font-mono">Semanas 7 a 9 (20 hrs).</p>
-                                <div class="bg-white p-3 rounded-lg border border-slate-200">
-                                    <p class="text-xs font-bold text-slate-700 mb-2 border-b pb-1">Temario Resumido:</p>
-                                    <ul class="text-xs text-slate-600 list-disc ml-4 space-y-1">
-                                        <li>Reglas de Indentación estricta en Python.</li>
-                                        <li>Estructuras de Decisión: <code class="bg-slate-100 px-1 text-primary">if</code>, <code class="bg-slate-100 px-1 text-primary">elif</code>, <code class="bg-slate-100 px-1 text-primary">else</code>.</li>
-                                        <li>Ciclos Definidos: Bucle <code class="bg-slate-100 px-1 text-primary">for</code> y rangos.</li>
-                                        <li>Ciclos Indefinidos: Bucle <code class="bg-slate-100 px-1 text-primary">while</code>.</li>
-                                        <li>Alteración de Flujo: <code class="bg-slate-100 px-1 text-primary">break</code>, <code class="bg-slate-100 px-1 text-primary">continue</code> y control de ciclos infinitos.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <i class="fa-solid fa-arrow-right text-slate-400 mt-1"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
+        <section class="mb-12 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+            <h2 class="text-xl font-bold mb-4 text-dark border-b pb-2"><i class="fa-brands fa-python text-primary mr-2"></i>Sintaxis Fundamental en Python vs C</h2>
+            <p class="mb-4 text-slate-600">Es crítico recordar que en este módulo migramos del lenguaje C a Python. Ya no verás puntos y comas (<code>;</code>) al final de cada línea, ni llaves (<code>{}</code>) para definir bloques. Python utiliza el <strong>salto de línea</strong> para saber que terminaste una orden, y confía ciegamente en una sintaxis limpia y minimalista. Cualquier carácter extra causará que el compilador rechace tu código.</p>
+        </section>
 
-            <!-- Unidad 2 -->
-            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm relative">
-                <div class="absolute top-0 right-8 bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-b-lg">Unidad 2 (66 hrs)</div>
-                <h3 class="text-xl font-bold text-dark mb-2 mt-4">Funciones y Memoria Dinámica</h3>
-                <p class="text-sm text-slate-500 mb-6">Programación modular, colecciones de datos y manejo de excepciones.</p>
-                
-                <div class="space-y-4">
-                    <a href="tema2_1.html" class="block bg-slate-50 p-5 rounded-2xl border border-slate-200 card-hover transition duration-300">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1 pr-4">
-                                <h4 class="font-bold text-secondary text-md">RA 2.1 Automatización con Funciones</h4>
-                                <p class="text-xs text-slate-500 mt-1 mb-3 font-mono">Semanas 10 a 12 (26 hrs).</p>
-                                <div class="bg-white p-3 rounded-lg border border-slate-200">
-                                    <p class="text-xs font-bold text-slate-700 mb-2 border-b pb-1">Temario Resumido:</p>
-                                    <ul class="text-xs text-slate-600 list-disc ml-4 space-y-1">
-                                        <li>Declaración de funciones personalizadas (<code class="bg-slate-100 px-1 text-secondary">def</code>).</li>
-                                        <li>Paso de parámetros (Args y Kwargs) y valores por defecto.</li>
-                                        <li>El uso del comando <code class="bg-slate-100 px-1 text-secondary">return</code>.</li>
-                                        <li>Ámbito de variables: Variables Locales vs Globales (Scope).</li>
-                                        <li>Creación e importación de Librerías / Módulos.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <i class="fa-solid fa-arrow-right text-slate-400 mt-1"></i>
-                        </div>
-                    </a>
-                    <a href="tema2_2.html" class="block bg-slate-50 p-5 rounded-2xl border border-slate-200 card-hover transition duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-accent text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">¡PRÁCTICA FINAL!</div>
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1 pr-4">
-                                <h4 class="font-bold text-secondary text-md">RA 2.2 Estructuras de Datos y Memoria</h4>
-                                <p class="text-xs text-slate-500 mt-1 mb-3 font-mono">Semanas 13 a 18 (40 hrs).</p>
-                                <div class="bg-white p-3 rounded-lg border border-slate-200">
-                                    <p class="text-xs font-bold text-slate-700 mb-2 border-b pb-1">Temario Resumido:</p>
-                                    <ul class="text-xs text-slate-600 list-disc ml-4 space-y-1">
-                                        <li>Estructuras Mutables: Listas (<code class="bg-slate-100 px-1 text-secondary">[]</code>).</li>
-                                        <li>Estructuras Inmutables: Tuplas (<code class="bg-slate-100 px-1 text-secondary">()</code>).</li>
-                                        <li>Pares Clave-Valor: Diccionarios (<code class="bg-slate-100 px-1 text-secondary">{}</code>).</li>
-                                        <li>Lógica de Pilas (LIFO) y Colas (FIFO).</li>
-                                        <li>Manejo de Errores: Bloques <code class="bg-slate-100 px-1 text-secondary">try - except</code> para prevención de caídas de software.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <i class="fa-solid fa-arrow-right text-slate-400 mt-1"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
     </main>
 
-    <footer class="bg-slate-50 text-slate-500 py-8 text-center text-sm border-t border-slate-200 mt-auto">
-        <p>CONALEP - Docente de Programación Informática | Ciclo Escolar Actual</p>
+    <footer class="bg-slate-100 text-slate-500 py-6 text-center text-sm border-t border-slate-200 mt-auto">
+        <p>CONALEP - Docente de Programación e IA | Ciclo Escolar Actual</p>
     </footer>
+
+    <script>
+        function openTab(tabId, btnElement) {
+            // Esconder todos los contenidos
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Resetear estilos de todos los botones
+            document.querySelectorAll('.tab-btn, [id^="btn-sem"]').forEach(btn => {
+                btn.classList.remove('text-primary', 'border-primary');
+                btn.classList.add('text-slate-500', 'border-transparent');
+            });
+
+            // Mostrar el contenido deseado
+            document.getElementById(tabId).classList.add('active');
+            // Aplicar estilo activo al botón presionado
+            btnElement.classList.remove('text-slate-500', 'border-transparent');
+            btnElement.classList.add('text-primary', 'border-primary');
+        }
+    </script>
 </body>
 </html>
